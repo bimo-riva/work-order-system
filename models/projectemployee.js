@@ -11,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      ProjectEmployee.belongsToMany(models.Project)
+      ProjectEmployee.belongsToMany(models.Employee)
     }
   };
   ProjectEmployee.init({
-    WorkId: DataTypes.INTEGER,
+    ProjectId: DataTypes.INTEGER,
     EmployeeId: DataTypes.INTEGER
   }, {
     sequelize,
