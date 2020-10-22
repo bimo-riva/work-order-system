@@ -136,7 +136,8 @@ div#avatar {
   height:32px;
   width:32px;
   background-color: rgb(61, 61, 238);
-  border-radius: 50%;
+  /* border-radius: 50%; */
+  color:white;
   margin-left:1rem
 }
 

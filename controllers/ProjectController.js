@@ -8,7 +8,11 @@ class ProjectController{
     Project.findAll({include : Employee})
     .then(data =>{
       // console.log(JSON.stringify(data,null,2))
-      res.render('project.ejs', {data})
+      let username = req.session.isLoggedIn ? req.session.username : ''
+      let position = req.session.isLoggedIn ? req.session.position : ''
+  
+      console.log(req.session)
+      res.render('project.ejs', {data, username, position})
     })
     .catch(err =>{
       res.send(err)

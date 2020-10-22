@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="/style.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-  <!-- <script defer src="/map.js"></script> -->
   <title>{ title }</title>
 </head>
 <body>
@@ -21,9 +20,15 @@
       </section>
       <section class="right">
         <button onclick="window.location.href = '/projects/add'" class="button">Create Project</button>
-        <div id="avatar">
-          <div></div>
-        </div>
+        <% if (username) {%>
+          <button onclick="window.location.href = '/logout'" class="button" style="margin-left: 1rem">Logout</button>
+          <div id="avatar">
+            <p ><%= username[0].toUpperCase() %> <%= username[1].toUpperCase() %></p>
+          </div>
+        <% } else { %>
+           
+          <button onclick="window.location.href = '/login'" class="button" style="margin-left: 1rem">Sign In</button>
+        <% } %>
       </section>
     </nav>
   </header>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>Login</title>
+</head>
+<body>
+  
+  <a href="/" style="margin: 2rem">< Back To Homepage</a>
+  
+  <div class="container" style="padding-top: 0;">
+
+    <h1 style="text-align: center;">Sign In</h1>
+  
+    <form action="/login" method="POST" style="margin: 0 auto">
+      <% if (errorLogin) { %>
+      <div style="padding: 2rem; background:rgb(248, 171, 171);color:rgb(201, 26, 26)">
+        <p>Invalid credentials</p>
+      </div>
+      <% } %>
+
+
+      <label for="user">Username/Email</label>
+      <input type="text" name="user" placeholder="Insert your username or email">
+      
+      <label for="password" >Password</label>
+      <input type="password" name="password" placeholder="Insert your password">
+      
+      <div class="actions">
+
+        <button class="button">Sign In</button>
+      </div>
+      <a href="/signup">Sign up instead</button>
+    </form>
+  </div>
+  
+</body>
+</html>

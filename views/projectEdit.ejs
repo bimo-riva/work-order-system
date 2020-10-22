@@ -56,9 +56,9 @@ defer
     const lng = Number("<%= data.location.split(' ')[1] %>")
     console.log({lat,lng})
 
-    const myLatlng = { lat, lng  };
+    const myLatlng = { lat, lng };
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 20,
+      zoom: 18,
       center: myLatlng,
     });
     // Create the initial InfoWindow.

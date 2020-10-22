@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teams</title>
-</head>
-<body>
-  <h1>ini adalah halaman Teams</h1>
+<%- include('partials/header', {title: 'Add Team Members'}) %>
+  <h1>Add Team Members</h1>
 <form action="/projects/teams/<%= data.id %> " method="post">
   <label for="employeeId">Team Member</label>
   <select name="employeeId">

@@ -1,5 +1,7 @@
 'use strict';
 
+const {Employee} = require('../models')
+
 const employee = [
   {
     name : "Bimo Dwien Prabowo",
@@ -7,7 +9,7 @@ const employee = [
     position : "Engineer",
     username: "bimo",
     email : "bimo.dwien@hacktiv.com",
-    password : "bimobimo123",
+    password : "123",
     createdAt : new Date(),
     updatedAt : new Date()
   },
@@ -17,7 +19,7 @@ const employee = [
     position : "Manager",
     username: "zul",
     email : "zul@hacktiv.com",
-    password : "reynaldi123",
+    password : "123",
     createdAt : new Date(),
     updatedAt : new Date()
   },
@@ -27,7 +29,7 @@ const employee = [
     position : "Engineer",
     username: "riva",
     email : "reynaldi.riva@hacktiv.com",
-    password : "reynaldi123",
+    password : "123",
     createdAt : new Date(),
     updatedAt : new Date()
   },
@@ -37,7 +39,7 @@ const employee = [
     position : "Helpdesk",
     username: "tamy",
     email : "tami.hu@hacktiv.com",
-    password : "password123",
+    password : "123",
     createdAt : new Date(),
     updatedAt : new Date()
   },
@@ -47,7 +49,7 @@ const employee = [
     position : "Engineer",
     username: "musa",
     email : "musa.bagja@hacktiv.com",
-    password : "musamus123",
+    password : "123",
     createdAt : new Date(),
     updatedAt : new Date()
   },
@@ -57,7 +59,7 @@ const employee = [
     position : "Engineer",
     username: "adrian",
     email : "adrian.kun@hacktif.com",
-    password : "bimobimo123",
+    password : "123",
     createdAt : new Date(),
     updatedAt : new Date()
   },
@@ -74,7 +76,9 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert("Employees", employee, {})
+    // return queryInterface.bulkInsert("Employees", employee, {})
+
+    return Employee.bulkCreate(employee)
 
   },
 
