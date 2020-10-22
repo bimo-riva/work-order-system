@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <h1>Edit Project</h1>
+
+  <form action="/projects/add" method="POST">
+    <label for="summary">Summary</label>
+    <input type="text" name="summary" value="<%= data.summary %> ">
+  
+    <label for="description">Description</label>
+    <textarea type="text" name="description" rows="5" cols="15"  ><%= data.description %> </textarea>
+  
+    <label for="priority">Priority</label>
+    <select name="priority">
+      <option value="Low" <%= data.priority === 'Low' ? 'selected' : '' %> >Low</option>
+      <option value="Medium" <%= data.priority === 'Medium' ? 'selected' : '' %> >Medium</option>
+      <option value="High" <%= data.priority === 'High' ? 'selected' : '' %> >High</option>
+    </select>
+    
+    <label for="status">Status</label>
+    <select name="status">
+      <option value="New">New</option>
+      <option value="On Progress">On Progress</option>
+      <option value="Close">Close</option>
+    </select>
+
+    <button type="button" class="button get-location" onclick="window.location.href='https://www.google.com/maps/search/?api=1'">Add Location</label>
+      <input type="text" name="location" hidden>
+
+
+
+      <div class="actions">
+  
+        <button type="submit" class="button">Create</button>
+        <button onclick="confirm('Are you sure you want to cancel?') 
+        ? window.location.href = '/projects' 
+        : ''" class="button button-danger">
+        Cancel
+      </button>
+
+
+  </form>
+</div>
+  
+<%- include('partials/footer') %>
