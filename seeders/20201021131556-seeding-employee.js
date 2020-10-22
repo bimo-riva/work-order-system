@@ -4,14 +4,25 @@ const employee = [
   {
     name : "Bimo Dwien Prabowo",
     position : "Engineer",
+    username: "bimo",
     email : "bimo.dwien@hacktiv.com",
     password : "bimobimo123",
     createdAt : new Date(),
     updatedAt : new Date()
   },
   {
-    name : "Reynaldi Riva",
+    name : "Mochamad Zulfikar",
     position : "Manager",
+    username: "zul",
+    email : "zul@hacktiv.com",
+    password : "reynaldi123",
+    createdAt : new Date(),
+    updatedAt : new Date()
+  },
+  {
+    name : "Reynaldi Riva",
+    position : "Engineer",
+    username: "riva",
     email : "reynaldi.riva@hacktiv.com",
     password : "reynaldi123",
     createdAt : new Date(),
@@ -20,6 +31,7 @@ const employee = [
   {
     name : "Tamy Hu",
     position : "Helpdesk",
+    username: "tamy",
     email : "tami.hu@hacktiv.com",
     password : "password123",
     createdAt : new Date(),
@@ -28,6 +40,7 @@ const employee = [
   {
     name : "Musa Bagja",
     position : "Engineer",
+    username: "musa",
     email : "musa.bagja@hacktiv.com",
     password : "musamus123",
     createdAt : new Date(),
@@ -36,6 +49,7 @@ const employee = [
   {
     name : "Adrian Kuncoro",
     position : "Engineer",
+    username: "adrian",
     email : "adrian.kun@hecktif.com",
     password : "bimobimo123",
     createdAt : new Date(),
