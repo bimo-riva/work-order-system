@@ -3,8 +3,9 @@
 const project =[
   {
     description : "Lorem ipsum dolor sit amet",
+    summary : "Lorem ipsum",
     status : "On Progress",
-    location : "",
+    location : "-6.185583, 106.822843",
     priority: "Medium",
     finished_time : "2020-10-21 17:35:35",
     actual_finished_time : null,
@@ -15,8 +16,9 @@ const project =[
   },
   {
     description : "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    summary : "sed do eiusmod tempor",
     status : "New",
-    location : "",
+    location : "-6.260732, 106.781699",
     priority: "High",
     finished_time : "2020-10-22 17:35:36",
     actual_finished_time : null,
@@ -26,8 +28,9 @@ const project =[
   },
   {
     description : "Ut enim ad minim veniam, quis nostrud exercitation",
+    summary : "Ut enim ad minim veniam",
     status : "Close",
-    location : "",
+    location : "-6.185583, 106.822843",
     priority: "Medium",
     finished_time : "2020-10-22 18:35:36",
     actual_finished_time : "2020-10-22 17:10:05",

@@ -14,6 +14,9 @@ module.exports = {
       EmployeeId: {
         type: Sequelize.INTEGER
       },
+      isLeader:{
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
