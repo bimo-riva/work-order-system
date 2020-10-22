@@ -96,37 +96,48 @@ body {
 header {
   height: var(--header-height);
   width: 100vw;
-  padding: 0.25rem 0.5rem;
-  background-color: var(--grey-lighter);
+  padding: 0.25rem;
+  /* background-color: var(--grey-lighter); */
+  background-color: var(--bg-color);
   display: flex;
   align-items: center;
   position: fixed;
   left:0;
   top:0;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.35);
+
 }
 
-header nav, header nav ul {
+header nav, header nav section {
   display:flex;
+  align-items: center;
 }
 header nav {
   width: 100%;
-  margin: 0 2rem;
+  margin: 0 1rem;
   justify-content: space-between;
 }
 
-header li {
+header a {
   color: var(--txt-color);
   font-weight: 600;
   font-size: 0.9rem;
-}
-
-header a {
   margin: 0 1rem;
 }
 
 
+
 header a:hover {
   color: var(--accent);
+}
+
+div#avatar {
+
+  height:32px;
+  width:32px;
+  background-color: rgb(61, 61, 238);
+  border-radius: 50%;
+  margin-left:1rem
 }
 
 .container {
@@ -147,4 +158,42 @@ header a:hover {
 .flex-row {
   display: flex;
   flex-direction: row
+}
+
+
+
+footer {
+  min-height: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--grey-lighter);
+}
+
+footer p {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.button {
+  display:block;
+  width: fit-content;
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.button-info {
+  background-color: var(--green);
+}
+
+.button-danger {
+  background-color: var(--red);
 }

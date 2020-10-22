@@ -2,7 +2,33 @@
 
 <div class="container">
 
-  <h1>HOME</h1>
+  <h1>All Projects</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Summary</th>
+        <th>Team Leader</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Time to resolution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.map(el => { %>
+        <tr>
+          <td><%= 'DEMO-'el.id %></td>
+          <td><%= el.summary %></td>
+          <td><%= el.leader %></td>
+          <td><%= el.status %></td>
+          <td><%= el.createdAt %></td>
+          <td><%= el.finished_time %></td>
+        </tr>
+
+      <% }) %>
+    </tbody>
+  </table>
 
 </div>
 

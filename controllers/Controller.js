@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 
 const {Employee, Project, ProjectEmployee} = require('../models')
 
-const isEmail = require('../helpers/index.js')
+const {isEmail } = require('../helpers/index.js')
 
 class Controller {
 

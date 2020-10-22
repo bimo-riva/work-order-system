@@ -65,9 +65,6 @@ class ProjectController{
 
 }
 
-<<<<<<< HEAD
-module.exports = ProjectEmployee
-=======
 module.exports = ProjectController
 
 // | GET    | /projects            | Menampilkan seluruh project yang ada di database                |
@@ -76,4 +73,3 @@ module.exports = ProjectController
 // | GET    | /projects/assign     | Menampilkan seluruh project yang di assign ke employee tertentu |
 // | GET    | /projects/unassigned | Menampilkan seluruh project yang belum di assign ke employee    |
 // | GET    | /projects/delete/:id | Menghapus buku dari database                                    |
->>>>>>> 4737ce0357c6967a7979badf5da63ad168907b14
