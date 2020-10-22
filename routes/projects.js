@@ -1,11 +1,14 @@
 const express = require('express')
 const projectRoutes = express.Router()
 
-const ProjectController = require('../controllers/EmployeeController')
+const ProjectController = require('../controllers/ProjectController')
 
 projectRoutes.get('/', ProjectController.show)
-
-
+projectRoutes.get('/add', ProjectController.getProjectAdd)
+projectRoutes.post('/add', ProjectController.postProjectAdd)
+projectRoutes.get('/mine', ProjectController.getProjectMine)
+projectRoutes.get('/unassigned', ProjectController.getProjectUnassigned)
+projectRoutes.get('/delete/:id', ProjectController.getProjectDelete)
 
 module.exports = projectRoutes
 
