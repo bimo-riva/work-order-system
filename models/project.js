@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+const {convertTime} = require('../helpers/index')
+
 module.exports = (sequelize, DataTypes) => {
   class Project extends Model {
     /**
@@ -13,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Project.belongsToMany(models.Employee, {through : models.ProjectEmployee})
     }
+    
   };
   Project.init({
     description: DataTypes.STRING,
@@ -26,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Project',
   });
+
   //Hooks
   Project.beforeCreate((instance, params)=>{
     if(instance.status === 'Low'){
@@ -37,6 +42,10 @@ module.exports = (sequelize, DataTypes) => {
     else if(instance.status === "High"){
       instance.finished_time = new Date() + (8 * 60 * 60 * 1000)
     }
+  })
+  Project.afterFind((instance, params)=>{
+    instance.finished_time = convertTime(instance.finished_time)
+    
   })
   return Project;
 };

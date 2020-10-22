@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Employee.belongsToMany(models.Project, {through : models.ProjectEmployee})
     }
+    
   };
   Employee.init({
     name: DataTypes.STRING,
