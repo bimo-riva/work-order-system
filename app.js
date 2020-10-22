@@ -6,16 +6,18 @@ const routes = require('./routes/index')
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended : true}))
-app.use(routes)
-
 app.use(session({
-  secret: "supercalifragilisticexpialidocious",
+  secret: "supersecret",
   resave: false,
   saveUninitialized: false,
   cookie: {
     maxAge: 120000
   }
 }));
+
+app.use(routes)
+app.use(express.static('public'))
+
 
 app.listen(port , () =>{
   console.log(`App berjalan di port ${port}`)

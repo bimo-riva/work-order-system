@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 
 const {Employee, Project, ProjectEmployee} = require('../models')
 
@@ -16,7 +16,7 @@ class Controller {
       position = req.session.position      
     }
 
-    res.render('home', {username, position})
+    res.render('home', { username, position })
     
   }
 
