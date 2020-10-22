@@ -25,9 +25,14 @@ class ProjectController{
     })
   }
 
-  static postProjectAdd(req, res){
+  static postProjectAdd(req,res){
+    let params ={
+      description : req.body.description,
+      summary : req.body.summary,
+      status : "New",
 
-    Project.create(req.body)
+    }
+    Project.create(params)
     .then(()=>{
       res.redirect('/projects/add',)
     })
