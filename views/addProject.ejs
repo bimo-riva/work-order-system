@@ -18,15 +18,15 @@
     <option value="High">High</option>
   </select>
 
-  <button type="button" class="button get-location" onclick="window.location.href='https://www.google.com/maps/search/?api=1'">Add Location</label>
-  <input type="text" name="location" hidden>
-
-
+  <label for="location">Location</label>
+  <input type="text" name="location" id="location" >
+  <div id="map"></div>
   
-    <div class="actions">
+  <div class="actions">
   
-      <button type="submit" class="button">Create</button>
-      <button onclick="confirm('Are you sure you want to cancel?') 
+    <button type="submit" class="button">Create</button>
+
+    <button onclick="confirm('Are you sure you want to cancel?') 
       ? window.location.href = '/projects' 
       : ''" class="button button-danger">
       Cancel
@@ -35,5 +35,45 @@
   
   </form>
 </div>
+
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfYFx8IP_8eaqvumAZ8DAqmn7N4A9_scE&callback=initMap&libraries=&v=weekly"
+defer
+></script>
+<script>
+
+  function initMap() {
+    const divMap = document.getElementById("map")
+
+    const myLatlng = { lat: -6.260732, lng: 106.781699 };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 18,
+      center: myLatlng,
+    });
+    // Create the initial InfoWindow.
+    let infoWindow = new google.maps.InfoWindow({
+      content: "Click the map to get Lat/Lng!",
+      position: myLatlng,
+    });
+  infoWindow.open(map);
+  // Configure the click listener.
+  map.addListener("click", (mapsMouseEvent) => {
+    // Close the current InfoWindow.
+    infoWindow.close();
+    // Create a new InfoWindow.
+    infoWindow = new google.maps.InfoWindow({
+      position: mapsMouseEvent.latLng,
+    });
+    infoWindow.setContent(
+      JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+    );
+
+    document.querySelector('#location').value = `${mapsMouseEvent.latLng.toJSON().lat} ${mapsMouseEvent.latLng.toJSON().lng}`
+    infoWindow.open(map);
+  });
+
+  
+}
+</script>
 
 <%- include('partials/footer') %>

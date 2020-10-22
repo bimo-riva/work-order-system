@@ -174,8 +174,6 @@ label, .label {
 }
 
 
-
-
 input, select, textarea {
   padding: 0.25rem 1rem;
   border: 1px solid var(--grey);
@@ -203,6 +201,11 @@ form .actions {
   margin: 0.25rem 0.25rem 0.25rem;
 }
 
+#map {
+  height: 400px;
+  width: 600px;
+  margin-top: 1rem;
+}
 
 .button {
   display:block;

@@ -26,6 +26,7 @@ class ProjectController{
   }
 
   static postProjectAdd(req,res){
+    console.log(req.body)
 
     Project.create(req.body)
     .then(()=>{
@@ -52,6 +53,7 @@ class ProjectController{
   }
 
   static postProjectEdit(req,res){
+    console.log(req.body)
     Project.update(req.body, {where : {id : req.params.id}})
     .then(data =>{
       res.redirect('/projects')
