@@ -1,12 +1,12 @@
-const router = require('express').Router()
-const Controller = require('../controllers/Controller')
+const express = require('express')
+const employeeRoutes = express.Router()
+const EmployeeController = require('../controllers/EmployeeController')
 
+employeeRoutes.get('/', EmployeeController.show)
+employeeRoutes.get('/add', Controller.getEmployeeAdd)
+employeeRoutes.post('/add', Controller.postEmployeeAdd)
+employeeRoutes.get('/edit', Controller.getEmployeeEdit)
+employeeRoutes.post('/edit', Controller.postEmployeeEdit)
 
+module.exports = employeeRoutes
 
-router.get('/', Controller.employees)
-router.get('/add', Controller.getEmployeeAdd)
-router.post('/add', Controller.postEmployeeAdd)
-router.get('/edit', Controller.getEmployeeEdit)
-router.post('/edit', Controller.postEmployeeEdit)
-
-module.exports = router

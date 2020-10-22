@@ -1,12 +1,14 @@
-const router = require('express').Router()
+const routes = require('express').Router()
 const Controller = require('../controllers/Controller')
 
-const employeeRouter = require('./employees')
-const projectRouter = require('./projects')
+const employeeRoutes = require('./employees')
+const projectRoutes = require('./projects')
 
-router.use('employees', employeeRouter)
-router.use('projects', projectRouter)
+routes.get('/', Controller.home)
+routes.get('/login', Controller.login)
+routes.post('/login', Controller.postLogin)
 
-router.get('/', Controller.projects)
+routes.use('/employees', employeeRoutes)
+routes.use('/projects', projectRoutes)
 
-module.exports = router
+module.exports = routes

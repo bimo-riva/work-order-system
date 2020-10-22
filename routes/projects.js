@@ -1,13 +1,8 @@
-const router = require('express').Router()
-const Controller = require('../controllers/Controller')
+const express = require('express')
+const projectRoutes = express.Router()
 
+const ProjectController = require('../controllers/EmployeeController')
 
+projectRoutes.get('/', ProjectController.show)
 
-router.get('/', Controller.projects)
-router.get('/add', Controller.getProjectAdd)
-router.post('/add', Controller.postProjectAdd)
-router.get('/open', Controller.getProjectsOpen)
-router.get('/unassigned', Controller.getProjectsUnassigned)
-router.get('/mine', Controller.getProjectsMine)
-
-module.exports = router
+module.exports = projectRoutes
