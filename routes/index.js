@@ -1,10 +1,11 @@
 const routes = require('express').Router()
 const Controller = require('../controllers/Controller')
+const ProjectController = require('../controllers/ProjectController')
 
 const employeeRoutes = require('./employees')
 const projectRoutes = require('./projects')
 
-routes.get('/', Controller.home)
+routes.get('/', ProjectController.show)
 routes.get('/login', Controller.login)
 routes.post('/login', Controller.postLogin)
 

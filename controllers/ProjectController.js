@@ -4,9 +4,10 @@ const { Project, Employee, ProjectEmployee } = require('../models/index')
 
 class ProjectController{
 
-  static show(res,req){
+  static show(req, res){
     Project.findAll({include : Employee})
     .then(data =>{
+      // console.log(JSON.stringify(data,null,2))
       res.render('project.ejs', {data})
     })
     .catch(err =>{
@@ -14,7 +15,7 @@ class ProjectController{
     })
   }
 
-  static getProjectAdd(res,req){
+  static getProjectAdd(req, res){
     Employee.findAll()
     .then(data =>{
       res.render('addProject', {data})
@@ -25,15 +26,10 @@ class ProjectController{
   }
 
   static postProjectAdd(req,res){
-    let params ={
-      description : req.body.description,
-      summary : req.body.summary,
-      status : "New",
 
-    }
-    Project.create(params)
+    Project.create(req.body)
     .then(()=>{
-      res.redirect('/add',)
+      res.redirect('/projects',)
     })
     .catch(err =>{
       res.send(err)
@@ -75,7 +71,7 @@ class ProjectController{
     })
   }
 
-  static getProjectUnassigned(res,req){
+  static getProjectUnassigned(req, res){
     Employee.findOne({where : {username : req.session.username}})
     .then(data =>{
       Project.findAll({include : Employee})
@@ -85,7 +81,7 @@ class ProjectController{
     })
   }
 
-  static getProjectDelete(res,req){
+  static getProjectDelete(req, res){
     Project.destroy({where : {id: req.params.id}})
     .then(data =>{
       res.redirect('/project.ejs')

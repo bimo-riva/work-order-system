@@ -6,6 +6,7 @@ class EmployeeController {
       include : Project
     })
     .then(data =>{
+      console.log(JSON.stringify(data,null,2))
       res.render('employee', {data})
     })
     .catch(err =>{

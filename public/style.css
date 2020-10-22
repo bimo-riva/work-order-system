@@ -141,9 +141,9 @@ div#avatar {
 }
 
 .container {
-  max-width: 900px;
+  /* max-width: 1200px; */
   min-width: 500px;
-  width: 80%;
+  width: 90%;
   flex: 1;
   min-height: calc(100vh - 2 * var(--header-height));
   margin: var(--header-height) auto 0;
@@ -160,20 +160,49 @@ div#avatar {
   flex-direction: row
 }
 
-
-
-footer {
-  min-height: var(--header-height);
+form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--grey-lighter);
+  flex-direction: column;
+  width: 60%;
+  min-width: 400px;
+  /* margin: 0 auto; */
 }
 
-footer p {
-  font-size: 0.9rem;
-  font-weight: 600;
+label, .label {
+  margin-top: 1rem;
+  margin-bottom: 0.25rem
 }
+
+
+
+
+input, select, textarea {
+  padding: 0.25rem 1rem;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+}
+
+input[type="date"] {
+  width: 200px;
+}
+
+input:focus {
+  box-shadow: 0 0 1px 1px rgba(79, 122, 221, 1);
+}
+
+table .actions, form .actions {
+  display: flex;
+  height: 100%;
+}
+
+form .actions {
+  margin-top: 1rem;
+}
+
+.actions a, .actions button {
+  margin: 0.25rem 0.25rem 0.25rem;
+}
+
 
 .button {
   display:block;
@@ -196,4 +225,30 @@ footer p {
 
 .button-danger {
   background-color: var(--red);
+}
+
+a.button:hover {
+  color: white;
+}
+
+.button:hover {
+  filter: brightness(1.2)
+}
+
+
+
+
+
+
+footer {
+  min-height: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--grey-lighter);
+}
+
+footer p {
+  font-size: 0.9rem;
+  font-weight: 600;
 }
