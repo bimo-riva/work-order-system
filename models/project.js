@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Project.init({
     description: DataTypes.STRING,
+    summary: DataTypes.STRING,
     status: DataTypes.STRING,
     location: DataTypes.STRING,
     priority: DataTypes.STRING,
