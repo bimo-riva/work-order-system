@@ -26,5 +26,17 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Project',
   });
+  //Hooks
+  Project.beforeCreate((instance, params)=>{
+    if(instance.status === 'Low'){
+      instance.finished_time = new Date() + (24 * 60 * 60 * 1000)
+    }
+    else if(instance.status === "Medium"){
+      instance.finished_time = new Date() + (16 * 60 * 60 * 1000)
+    }
+    else if(instance.status === "High"){
+      instance.finished_time = new Date() + (8 * 60 * 60 * 1000)
+    }
+  })
   return Project;
 };
