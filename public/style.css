@@ -141,9 +141,9 @@ div#avatar {
 }
 
 .container {
-  max-width: 900px;
+  /* max-width: 1200px; */
   min-width: 500px;
-  width: 80%;
+  width: 90%;
   flex: 1;
   min-height: calc(100vh - 2 * var(--header-height));
   margin: var(--header-height) auto 0;
