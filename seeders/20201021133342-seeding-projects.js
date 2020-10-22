@@ -3,6 +3,7 @@
 const project =[
   {
     description : "Lorem ipsum dolor sit amet",
+    summary : "Lorem ipsum",
     status : "On Progress",
     location : "-6.185583, 106.822843",
     priority: "Medium",
@@ -15,6 +16,7 @@ const project =[
   },
   {
     description : "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    summary : "sed do eiusmod tempor",
     status : "New",
     location : "-6.260732, 106.781699",
     priority: "High",
@@ -26,6 +28,7 @@ const project =[
   },
   {
     description : "Ut enim ad minim veniam, quis nostrud exercitation",
+    summary : "Ut enim ad minim veniam",
     status : "Close",
     location : "-6.185583, 106.822843",
     priority: "Medium",

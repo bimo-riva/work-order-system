@@ -11,6 +11,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      summary:{
+        type: Sequelize.STRING
+      },
       status: {
         type: Sequelize.STRING
       },
