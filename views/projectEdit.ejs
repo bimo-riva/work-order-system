@@ -24,11 +24,10 @@
       <option value="Close">Close</option>
     </select>
 
-    <button type="button" class="button get-location" onclick="window.location.href='https://www.google.com/maps/search/?api=1'">Add Location</label>
-      <input type="text" name="location" hidden>
-
-
-
+  
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" value="<%= data.location.split(' ')[0] %> <%= data.location.split(' ')[1] %>">
+    <div id="map"></div>
       <div class="actions">
   
         <button type="submit" class="button">Create</button>
@@ -41,5 +40,50 @@
 
   </form>
 </div>
+
+
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfYFx8IP_8eaqvumAZ8DAqmn7N4A9_scE&callback=initMap&libraries=&v=weekly"
+defer
+></script>
+<script>
+
+  function initMap() {
+
+    const divMap = document.getElementById("map")
+
+    const lat = Number("<%= data.location.split(' ')[0] %>")
+    const lng = Number("<%= data.location.split(' ')[1] %>")
+    console.log({lat,lng})
+
+    const myLatlng = { lat, lng  };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 20,
+      center: myLatlng,
+    });
+    // Create the initial InfoWindow.
+    let infoWindow = new google.maps.InfoWindow({
+      content: "Click the map to get Lat/Lng!",
+      position: myLatlng,
+    });
+  infoWindow.open(map);
+  // Configure the click listener.
+  map.addListener("click", (mapsMouseEvent) => {
+    // Close the current InfoWindow.
+    infoWindow.close();
+    // Create a new InfoWindow.
+    infoWindow = new google.maps.InfoWindow({
+      position: mapsMouseEvent.latLng,
+    });
+    infoWindow.setContent(
+      JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+    );
+
+    document.querySelector('#location').value = `${mapsMouseEvent.latLng.toJSON().lat} ${mapsMouseEvent.latLng.toJSON().lng}`
+    infoWindow.open(map);
+  });
+
   
+}
+</script>
 <%- include('partials/footer') %>
