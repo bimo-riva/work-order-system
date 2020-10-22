@@ -43,8 +43,10 @@ module.exports = (sequelize, DataTypes) => {
       instance.finished_time = new Date() + (8 * 60 * 60 * 1000)
     }
   })
-  Project.afterFind((instance, params)=>{
-    instance.finished_time = convertTime(instance.finished_time)
+  Project.afterFind((instances, params)=>{
+    instances.forEach(instance =>{
+      instance.finished_time = convertTime(instance.finished_time)
+    })
     
   })
   return Project;
