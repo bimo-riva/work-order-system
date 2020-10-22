@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   Project.init({
     description: DataTypes.STRING,
     status: DataTypes.STRING,
+    summary: DataTypes.STRING,
     location: DataTypes.STRING,
     priority: DataTypes.STRING,
     finished_time: DataTypes.DATE,
@@ -33,15 +34,17 @@ module.exports = (sequelize, DataTypes) => {
 
   //Hooks
   Project.beforeCreate((instance, params)=>{
-    if(instance.status === 'Low'){
-      instance.finished_time = new Date() + (24 * 60 * 60 * 1000)
+    if(instance.priority === 'Low'){
+      instance.finished_time = Date.now() + (24 * 60 * 60 * 1000)
     }
-    else if(instance.status === "Medium"){
-      instance.finished_time = new Date() + (16 * 60 * 60 * 1000)
+    else if(instance.priority === "Medium"){
+      instance.finished_time = Date.now() + (16 * 60 * 60 * 1000)
     }
-    else if(instance.status === "High"){
-      instance.finished_time = new Date() + (8 * 60 * 60 * 1000)
+    else if(instance.priority === "High"){
+      instance.finished_time = Date.now() + (8 * 60 * 60 * 1000)
     }
+
+    instance.status = 'New'
   })
   return Project;
 };
