@@ -1,6 +1,7 @@
 const { Project, Employee, ProjectEmployee } = require('../models/index')
 
 
+
 class ProjectController{
 
   static show(req, res){
@@ -25,16 +26,42 @@ class ProjectController{
   }
 
   static postProjectAdd(req, res){
+
     Project.create(req.body)
     .then(()=>{
-      res.redirect('/add',)
+      res.redirect('/projects/add',)
     })
     .catch(err =>{
       res.send(err)
     })
   }
 
-  static getProjectMine(req, res){
+  static getProjectEdit(req,res){
+    let employee;
+    Employee.findAll()
+    .then(data =>{
+      employee = data
+      return Project.findByPk(req.params.id)
+    })
+    .then(data =>{
+      res.render('projectEdit', {data})
+    })
+    .catch(err =>{
+      res.send(err)
+    })
+  }
+
+  static postProjectEdit(req,res){
+    Project.update(req.body, {where : {id : req.params.id}})
+    .then(data =>{
+      res.redirect('/projects')
+    })
+    .catch(err =>{
+      res.send(err)
+    })
+  }
+
+  static getProjectMine(res,req){
     Employee.findOne({where :{username : req.session.username}})
     .then(data =>{
       ProjectEmployee.findAll({where : {id: data.id}})
