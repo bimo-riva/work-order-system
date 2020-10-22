@@ -13,6 +13,7 @@
         <th>Status</th>
         <th>Created</th>
         <th>Time to resolution</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,10 @@
           <td><%= el.status %></td>
           <td><%= el.createdAt %></td>
           <td><%= el.finished_time %></td>
+          <td>
+            <a href="/projects/edit/<%= el.id %> ">Edit</a>
+            <a href="/">Show Location</a>
+          </td>
         </tr>
 
       <% }) %>

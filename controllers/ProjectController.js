@@ -45,7 +45,7 @@ class ProjectController{
       return Project.findByPk(req.params.id)
     })
     .then(data =>{
-      res.render('projectEdit', {data})
+      res.render('projectEdit', {data, employee})
     })
     .catch(err =>{
       res.send(err)
@@ -92,7 +92,6 @@ class ProjectController{
       res.send(err)
     })
   }
-
 }
 
 module.exports = ProjectController

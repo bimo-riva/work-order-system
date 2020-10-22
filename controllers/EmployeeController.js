@@ -6,12 +6,24 @@ class EmployeeController {
       include : Project
     })
     .then(data =>{
-      console.log(JSON.stringify(data,null,2))
+      data.forEach(element => {
+        if(element.Projects.length === 0){
+          element.status = 'Available'
+        }
+        else{
+          element.status = 'On Duty'
+        }        
+      });
       res.render('employee', {data})
     })
     .catch(err =>{
       res.send(err)
     })
+  }
+
+  static getTeams(req,res){
+
+    
   }
 }
 
