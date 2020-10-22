@@ -20,11 +20,6 @@ class EmployeeController {
       res.send(err)
     })
   }
-
-  static getTeams(req,res){
-
-    
-  }
 }
 
 module.exports = EmployeeController

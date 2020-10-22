@@ -11,6 +11,8 @@ projectRoutes.get('edit/:id', ProjectController.postProjectEdit)
 projectRoutes.get('/mine', ProjectController.getProjectMine)
 projectRoutes.get('/unassigned', ProjectController.getProjectUnassigned)
 projectRoutes.get('/delete/:id', ProjectController.getProjectDelete)
+projectRoutes.get('/teams/:id', ProjectController.getTeams)
+projectRoutes.post('/teams/:id', ProjectController.postTeams)
 
 module.exports = projectRoutes
 

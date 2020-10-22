@@ -92,6 +92,31 @@ class ProjectController{
       res.send(err)
     })
   }
+
+  static getTeams(req,res){
+    let employee
+    Employee.findAll({where : {position : 'Engineer'}})
+    .then(data =>{
+      employee = data
+      return ProjectEmployee.findAll({ include: Employee, where :{ProjectId : req.params.id}})
+    })
+    .then(data =>{
+      res.render('addTeam', {data, employee})
+    })
+    .catch(err=>{
+      res.send(err)
+    })
+  }
+  
+  static postTeams(req,res){
+    ProjectEmployee.create(req.body)
+    .then(data=>{
+      res.redirect('/projects/Teams')
+    })
+    .catch(err =>{
+      res.send(err)
+    })
+  }
 }
 
 module.exports = ProjectController
