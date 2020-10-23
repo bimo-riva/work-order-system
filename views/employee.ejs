@@ -1,0 +1,30 @@
+<%- include('partials/header', username, position) %>
+
+<div class="container">
+
+  <h1>EMPLOYEES</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Position</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(el =>{ %> 
+      <tr>
+        <td><%= el.name %> </td>
+        <td><%= el.gender %> </td>
+        <td><%= el.position %> </td>
+        <td><%= el.status %> </td>
+      </tr>
+      <% }) %> 
+    </tbody>
+  </table>
+
+</div>
+
+<%- include('partials/footer') %>

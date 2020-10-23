@@ -1,0 +1,89 @@
+<%- include('partials/header', {username, position}) %>
+
+<div class="container">
+  <h1>Edit Project</h1>
+
+  <form action="/projects/edit/<%= data.id %>" method="POST">
+    <label for="summary">Summary</label>
+    <input type="text" name="summary" value="<%= data.summary %> ">
+  
+    <label for="description">Description</label>
+    <textarea type="text" name="description" rows="5" cols="15"  ><%= data.description %> </textarea>
+  
+    <label for="priority">Priority</label>
+    <select name="priority">
+      <option value="Low" <%= data.priority === 'Low' ? 'selected' : '' %> >Low</option>
+      <option value="Medium" <%= data.priority === 'Medium' ? 'selected' : '' %> >Medium</option>
+      <option value="High" <%= data.priority === 'High' ? 'selected' : '' %> >High</option>
+    </select>
+    
+    <label for="status">Status</label>
+    <select name="status">
+      <option value="New">New</option>
+      <option value="On Progress">On Progress</option>
+      <option value="Close">Close</option>
+    </select>
+
+  
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" value="<%= data.location.split(' ')[0] %> <%= data.location.split(' ')[1] %>">
+    <div id="map"></div>
+      <div class="actions">
+  
+        <button type="submit" class="button">Update</button>
+        <button onclick="confirm('Are you sure you want to cancel?') 
+        ? window.location.href = '/projects' 
+        : ''" class="button button-danger">
+        Cancel
+      </button>
+
+
+  </form>
+</div>
+
+
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfYFx8IP_8eaqvumAZ8DAqmn7N4A9_scE&callback=initMap&libraries=&v=weekly"
+defer
+></script>
+<script>
+
+  function initMap() {
+
+    const divMap = document.getElementById("map")
+
+    const lat = Number("<%= data.location.split(' ')[0] %>")
+    const lng = Number("<%= data.location.split(' ')[1] %>")
+    console.log({lat,lng})
+
+    const myLatlng = { lat, lng };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 18,
+      center: myLatlng,
+    });
+    // Create the initial InfoWindow.
+    let infoWindow = new google.maps.InfoWindow({
+      content: "Click the map to get Lat/Lng!",
+      position: myLatlng,
+    });
+  infoWindow.open(map);
+  // Configure the click listener.
+  map.addListener("click", (mapsMouseEvent) => {
+    // Close the current InfoWindow.
+    infoWindow.close();
+    // Create a new InfoWindow.
+    infoWindow = new google.maps.InfoWindow({
+      position: mapsMouseEvent.latLng,
+    });
+    infoWindow.setContent(
+      JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+    );
+
+    document.querySelector('#location').value = `${mapsMouseEvent.latLng.toJSON().lat} ${mapsMouseEvent.latLng.toJSON().lng}`
+    infoWindow.open(map);
+  });
+
+  
+}
+</script>
+<%- include('partials/footer') %>
