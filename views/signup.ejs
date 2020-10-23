@@ -1,4 +1,4 @@
-<%- include('partials/header', {title: 'Sign Up'}) %>
+<%- include('partials/header', {title: 'Sign Up', username, position}) %>
 
 <div class="container">
 
@@ -12,6 +12,13 @@
     <label for="password">Password</label>
     <input type="password" name="password">
     
+
+    <label for="position">Position</label>
+    <select name="position" >
+      <option value="Manager">Manager</option>
+      <option value="Engineer">Engineer</option>
+      <option value="Helpdesk">Helpdesk</option>
+    </select>
     <button class="button" type="submit">Sign Up</button>
 
   </form>

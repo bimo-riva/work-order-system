@@ -32,10 +32,12 @@ class Controller {
   }
 
   static signup(req, res) {
+    let username = req.session.isLoggedIn ? req.session.username : ''
+      let position = req.session.isLoggedIn ? req.session.position : ''
     if (req.query.err) {
-      res.render('signup', {errorSignup: true})
+      res.render('signup', {errorSignup: true, username, position})
     } else {
-      res.render('signup', {errorSignup: false})
+      res.render('signup', {errorSignup: false, username, position})
     }
 
   }
