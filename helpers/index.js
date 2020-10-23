@@ -21,10 +21,12 @@ const convertTime = time => {
 
 
   if (diff/hour >= 1) {
-    output += `${Math.trunc(diff/hour)} hour${Math.trunc(diff/hour) >= 2 ? 's' : ''} `
+    output += `${Math.ceil(diff/hour)} hour${Math.ceil(diff/hour) >= 2 ? 's' : ''} `
+  } else {
+    output += `${(diff % hour / minute).toFixed(0)} minute${(diff % hour / minute).toFixed(0) >= 2 ? 's' : '' }`
+
   }
 
-  output += `${(diff % hour / minute).toFixed(0)} minute${(diff % hour / minute).toFixed(0) >= 2 ? 's' : '' }`
 
   return output
 

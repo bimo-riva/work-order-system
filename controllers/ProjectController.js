@@ -64,6 +64,7 @@ class ProjectController{
 
   static postProjectEdit(req,res){
     console.log(req.body)
+    
     Project.update(req.body, {where : {id : req.params.id}})
     .then(data =>{
       res.redirect('/projects')
@@ -104,16 +105,24 @@ class ProjectController{
   }
 
   static getTeams(req,res){
+    let username = req.session.isLoggedIn ? req.session.username : ''
+    let position = req.session.isLoggedIn ? req.session.position : ''
     let employee
+    let members
     Employee.findAll({where : {position : 'Engineer'}})
     .then(data =>{
       employee = data
       return ProjectEmployee.findAll({ include: Employee, where :{ProjectId : req.params.id}})
     })
     .then(data =>{
-      let username = req.session.isLoggedIn ? req.session.username : ''
-      let position = req.session.isLoggedIn ? req.session.position : ''
-      res.render('addTeam', {data, employee, username, position})
+      members = data
+
+      return Project.findByPk(req.params.id)
+    })
+    .then(project => {
+      console.log(JSON.stringify(members,null,2))
+      res.render('addTeam', {project, members, employee, username, position})
+
     })
     .catch(err=>{
       res.send(err)
@@ -121,9 +130,25 @@ class ProjectController{
   }
   
   static postTeams(req,res){
-    ProjectEmployee.create(req.body)
+    let input = {
+      EmployeeId : req.body.EmployeeId,
+      ProjectId : req.params.id,
+    }
+
+    let isLeader
+    if (req.body.isLeader  === 'on') {
+      isLeader = true
+    } else {
+      isLeader = false
+    }
+
+    input.isLeader = isLeader
+
+    console.log({input})
+
+    ProjectEmployee.create(input)
     .then(data=>{
-      res.redirect('/projects/Teams')
+      res.redirect(`/projects/teams/${req.params.id}`)
     })
     .catch(err =>{
       res.send(err)

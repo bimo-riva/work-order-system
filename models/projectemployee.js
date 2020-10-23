@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   ProjectEmployee.init({
     ProjectId: DataTypes.INTEGER,
-    EmployeeId: DataTypes.INTEGER
+    EmployeeId: DataTypes.INTEGER,
+    isLeader: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'ProjectEmployee',

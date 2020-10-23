@@ -3,7 +3,7 @@
 <div class="container">
   <h1>Edit Project</h1>
 
-  <form action="/projects/add" method="POST">
+  <form action="/projects/edit/<%= data.id %>" method="POST">
     <label for="summary">Summary</label>
     <input type="text" name="summary" value="<%= data.summary %> ">
   
@@ -30,7 +30,7 @@
     <div id="map"></div>
       <div class="actions">
   
-        <button type="submit" class="button">Create</button>
+        <button type="submit" class="button">Update</button>
         <button onclick="confirm('Are you sure you want to cancel?') 
         ? window.location.href = '/projects' 
         : ''" class="button button-danger">

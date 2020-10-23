@@ -199,6 +199,40 @@ table .actions, form .actions {
   height: 100%;
 }
 
+
+table {
+  margin-top: 0.5rem;
+  margin: 0 auto;
+  width: 100%;
+  /* table-layout: fixed; */
+  border-collapse: collapse;
+  border: none;
+
+}
+
+th {
+  text-align: left;
+}
+
+
+tbody tr {
+  border-top: 2px solid rgb(230, 230, 230);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--grey-lightest);
+}
+
+tbody tr:hover {
+  background-color: var(--blue-lighter);
+  color: var(--accent);
+}
+
+td, th {
+  padding: 0.5rem 0.85rem;
+}
+
+
 form .actions {
   margin-top: 1rem;
 }
@@ -207,6 +241,9 @@ form .actions {
   margin: 0.25rem 0.25rem 0.25rem;
 }
 
+h2 {
+  margin-top: 1.5rem;
+}
 #map {
   height: 400px;
   width: 600px;

@@ -9,7 +9,7 @@
       <tr>
         <th>Key</th>
         <th>Summary</th>
-        <th>Team Leader</th>
+        <!-- <th>Team Leader</th> -->
         <th>Status</th>
         <th>Created</th>
         <th>Time to resolution</th>
@@ -21,13 +21,15 @@
         <tr>
           <td>DEMO-<%= el.id %></td>
           <td><%= el.summary %></td>
-          <td><%= el.leader %></td>
           <td><%= el.status %></td>
           <td><%= el.getDate() %></td>
-          <td><%= convertTime(new Date(el.finished_time)) %></td>
+          <td style=<%= convertTime(new Date(el.finished_time))[0] === '-' ? "color:red" : "color:blue"%>><%= convertTime(new Date(el.finished_time)) %></td>
           <td>
-            <a href="/projects/edit/<%= el.id %> ">Edit</a>
-            <a href="/">Show Location</a>
+            <div class="actions">
+
+              <a href="/projects/edit/<%= el.id %> " class="button">Edit</a>
+              <a href="/projects/teams/<%= el.id %>" class="button button-info">Assign Members</a>
+            </div>
           </td>
         </tr>
 

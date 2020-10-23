@@ -1,36 +1,49 @@
-<%- include('partials/header', {title: 'Add Team Members', {username, position}}) %>
+<%- include('partials/header', {title: 'Add Team Members', username, position}) %>
+
+<div class="container">
+
   <h1>Add Team Members</h1>
-<form action="/projects/teams/<%= data.id %> " method="post">
-  <label for="employeeId">Team Member</label>
-  <select name="employeeId">
-    <%employee.forEach(el =>{ %> 
+  <form action="/projects/teams/<%= project.id %>" method="post">
+    <label for="EmployeeId">Team Member</label>
+    <select name="EmployeeId">
+      <%employee.forEach(el =>{ %> 
       <option value="<%= el.id %>"> <%= el.name %> </option>
-    <% }) %> 
+      <% }) %> 
   </select>
 
-  <input type="checkbox" name="isLeader">
-  <label for="isLeader">Leader</label>
+  <div>
+    <input type="checkbox" name="isLeader">
+    <label for="isLeader">Leader</label>
+  </div>
 
-  <button type="submit">Add Member</button>
+  <div class="actions">
+
+    <button type="submit" class="button">Add Member</button>
+  </div>
 </form>
-<h2>Team Members</h2>
+<h2 >Team Members</h2>
 
 <table>
   <thead>
     <tr>
       <td>No</td>
       <td>Name</td>
+      <td>Status</td>
     </tr>
   </thead>
   <tbody>
-    <% data.forEach((el,i) => { %> 
-    <tr>
-      <th><%= i+1 %> </th>
-      <th><%= el.name %> </th>
+    <% members.forEach((el,i) => { %> 
+      <tr>
+        <td><%= i+1 %> </td>
+        <td><%= el.Employee.name %> </td>
+        <% if (el.isLeader) { %>
+        <td>Team Leader</td>
+        <% } %> 
     </tr>
     <% }) %> 
   </tbody>
 </table>
   
+</div>
 </body>
 </html>
