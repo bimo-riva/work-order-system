@@ -91,6 +91,7 @@ class Controller {
           if (result) {
             req.session.isLoggedIn = true
             req.session.username = data.username
+            req.session.position = data.position
 
             res.redirect('/')
           } else {

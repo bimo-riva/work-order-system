@@ -13,6 +13,8 @@ class ProjectController{
       let position = req.session.isLoggedIn ? req.session.position : ''
   
       // console.log(req.session)
+
+      console.log({username, position})
       
       res.render('project.ejs', {data, username, position, convertTime})
     })
