@@ -21,9 +21,9 @@
       <section class="right">
         <button onclick="window.location.href = '/projects/add'" class="button">Create Project</button>
         <% if (username) {%>
-          <button onclick="window.location.href = '/logout'" class="button" style="margin-left: 1rem">Logout</button>
+          <button onclick="window.location.href = '/logout'" class="button button-logout" >Logout</button>
           <div id="avatar">
-            <p ><%= username[0].toUpperCase() %> <%= username[1].toUpperCase() %></p>
+            <div><%= username[0].toUpperCase() %><%= username[1].toUpperCase() %></div>
           </div>
         <% } else { %>
            

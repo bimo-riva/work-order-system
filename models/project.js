@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Project.belongsToMany(models.Employee, {through : models.ProjectEmployee})
     }
+
+    getDate() {
+      return this.createdAt.toISOString().split('T')[0]
+    }
+    
     
   };
   Project.init({

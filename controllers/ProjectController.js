@@ -1,18 +1,20 @@
 const { Project, Employee, ProjectEmployee } = require('../models/index')
 
 
+const {convertTime} = require('../helpers')
+
 
 class ProjectController{
 
   static show(req, res){
     Project.findAll({include : Employee})
     .then(data =>{
-      // console.log(JSON.stringify(data,null,2))
       let username = req.session.isLoggedIn ? req.session.username : ''
       let position = req.session.isLoggedIn ? req.session.position : ''
   
-      console.log(req.session)
-      res.render('project.ejs', {data, username, position})
+      // console.log(req.session)
+      
+      res.render('project.ejs', {data, username, position, convertTime})
     })
     .catch(err =>{
       res.send(err)
@@ -22,7 +24,9 @@ class ProjectController{
   static getProjectAdd(req, res){
     Employee.findAll()
     .then(data =>{
-      res.render('addProject', {data})
+      let username = req.session.isLoggedIn ? req.session.username : ''
+      let position = req.session.isLoggedIn ? req.session.position : ''
+      res.render('addProject', {data, username, position})
     })
     .catch(err =>{
       res.send(err)
@@ -30,7 +34,7 @@ class ProjectController{
   }
 
   static postProjectAdd(req,res){
-    console.log(req.body)
+    // console.log(req.body)
 
     Project.create(req.body)
     .then(()=>{
@@ -49,7 +53,9 @@ class ProjectController{
       return Project.findByPk(req.params.id)
     })
     .then(data =>{
-      res.render('projectEdit', {data, employee})
+      let username = req.session.isLoggedIn ? req.session.username : ''
+      let position = req.session.isLoggedIn ? req.session.position : ''
+      res.render('projectEdit', {data, employee, username, position})
     })
     .catch(err =>{
       res.send(err)
@@ -105,7 +111,9 @@ class ProjectController{
       return ProjectEmployee.findAll({ include: Employee, where :{ProjectId : req.params.id}})
     })
     .then(data =>{
-      res.render('addTeam', {data, employee})
+      let username = req.session.isLoggedIn ? req.session.username : ''
+      let position = req.session.isLoggedIn ? req.session.position : ''
+      res.render('addTeam', {data, employee, username, position})
     })
     .catch(err=>{
       res.send(err)

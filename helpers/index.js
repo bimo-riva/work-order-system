@@ -9,6 +9,7 @@ const isEmail = (value) => {
   }
 }
 
+
 const convertTime = time => {
   let minute = 60*1000
   let hour = 60*minute
@@ -23,10 +24,11 @@ const convertTime = time => {
     output += `${Math.trunc(diff/hour)} hour${Math.trunc(diff/hour) >= 2 ? 's' : ''} `
   }
 
-  output += `${(diff % hour / minute).toFixed(0)} minute${(diff % hour / minute).toFixed(0) >= 2 ? 's' : '' } ago`
+  output += `${(diff % hour / minute).toFixed(0)} minute${(diff % hour / minute).toFixed(0) >= 2 ? 's' : '' }`
 
   return output
 
 }
+
 
 module.exports = {isEmail, convertTime}

@@ -23,8 +23,8 @@
           <td><%= el.summary %></td>
           <td><%= el.leader %></td>
           <td><%= el.status %></td>
-          <td><%= el.createdAt %></td>
-          <td><%= el.finished_time %></td>
+          <td><%= el.getDate() %></td>
+          <td><%= convertTime(new Date(el.finished_time)) %></td>
           <td>
             <a href="/projects/edit/<%= el.id %> ">Edit</a>
             <a href="/">Show Location</a>

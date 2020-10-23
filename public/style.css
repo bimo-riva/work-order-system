@@ -133,12 +133,17 @@ header a:hover {
 
 div#avatar {
 
-  height:32px;
-  width:32px;
+  height:36px;
+  width:36px;
   background-color: rgb(61, 61, 238);
-  /* border-radius: 50%; */
+  border-radius: 50%;
   color:white;
-  margin-left:1rem
+  margin-left:1rem;
+  font-size: 0.9rem;
+  font-weight:500;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
@@ -223,6 +228,12 @@ form .actions {
   cursor: pointer;
 }
 
+.button-logout {
+  margin-left: 1rem;
+  background-color: var(--bg-color);
+  border: 2px solid var(--accent);
+  color: var(--accent)
+}
 .button-info {
   background-color: var(--green);
 }

@@ -1,4 +1,4 @@
-<%- include('partials/header', {title: 'Add Team Members'}) %>
+<%- include('partials/header', {title: 'Add Team Members', {username, position}}) %>
   <h1>Add Team Members</h1>
 <form action="/projects/teams/<%= data.id %> " method="post">
   <label for="employeeId">Team Member</label>
