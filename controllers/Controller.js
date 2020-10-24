@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const { Op } = require("sequelize")
 
-const {Employee, Project, EmployeeProject} = require('../models')
+const {Employee, Project, EmployeeProject, EmployeeRole } = require('../models')
 
 const { isEmail } = require('../helpers/index.js')
 
@@ -10,14 +10,14 @@ class Controller {
   static home(req, res) {
 
     let username
-    let role
+    let roles
 
     if(req.session.isLoggedIn) {
       username = req.session.username
-      role = req.session.role      
+      roles = req.session.roles      
     }
 
-    res.render('home', { username, role })
+    res.render('home', { username, roles })
     
   }
 
@@ -35,17 +35,16 @@ class Controller {
     let username = req.session.isLoggedIn ? req.session.username : ''
       let role = req.session.isLoggedIn ? req.session.role : ''
     if (req.query.err) {
-      res.render('signup', {errorSignup: true, username, role})
+      res.render('signup', {errorSignup: true, username, roles})
     } else {
-      res.render('signup', {errorSignup: false, username, role})
+      res.render('signup', {errorSignup: false, username, roles})
     }
 
   }
 
   static postSignup(req, res) {
 
-    console.log(req.body)
-
+    // console.log(req.body)
 
     Employee.create(req.body)
     .then(() => res.redirect('/'))
@@ -77,8 +76,6 @@ class Controller {
 
     }
 
-    
-
     Employee.findOne({
       where:  input
     })
@@ -88,16 +85,19 @@ class Controller {
       } else {
         bcrypt.compare(req.body.password, data.password)
         .then(result => {
-          if (result) {
+          if (!result) {
+            res.redirect('/login?err=true')
+            
+          } else {
             req.session.isLoggedIn = true
             req.session.username = data.username
-            req.session.role = data.role
-
-            res.redirect('/')
-          } else {
-            res.redirect('/login?err=true')
-
+            
+            return EmployeeRole.findAll({where: { EmployeeId: data.id}})
           }
+        })
+        .then(roles => {
+          req.session.roles = roles
+          res.redirect('/')
         })
         .catch(err => res.send(err))
       }

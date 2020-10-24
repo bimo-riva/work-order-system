@@ -1,12 +1,11 @@
 const { Project, Employee, EmployeeProject } = require('../models/index')
 
-
-const {convertTime} = require('../helpers')
-
-
 class ProjectController{
 
   static show(req, res){
+
+    
+
     Project.findAll({include : Employee})
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
@@ -14,9 +13,9 @@ class ProjectController{
   
       // console.log(req.session)
 
-      console.log({username, role})
+      console.log({username, roles})
       
-      res.render('project.ejs', {data, username, role, convertTime})
+      res.render('project.ejs', {data, username, roles})
     })
     .catch(err =>{
       res.send(err)
@@ -28,7 +27,7 @@ class ProjectController{
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
       let role = req.session.isLoggedIn ? req.session.role : ''
-      res.render('addProject', {data, username, role})
+      res.render('addProject', {data, username, roles})
     })
     .catch(err =>{
       res.send(err)
@@ -57,7 +56,7 @@ class ProjectController{
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
       let role = req.session.isLoggedIn ? req.session.role : ''
-      res.render('projectEdit', {data, employee, username, role})
+      res.render('projectEdit', {data, employee, username, roles})
     })
     .catch(err =>{
       res.send(err)
@@ -123,7 +122,7 @@ class ProjectController{
     })
     .then(project => {
       console.log(JSON.stringify(members,null,2))
-      res.render('addTeam', {project, members, employee, username, role})
+      res.render('addTeam', {project, members, employee, username, roles})
 
     })
     .catch(err=>{

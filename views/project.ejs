@@ -1,4 +1,4 @@
-<%- include('partials/header', {username, role, title: 'Projects'}) %>
+<%- include('partials/header', {username, roles, title: 'Projects'}) %>
 
 <div class="container">
 
@@ -22,8 +22,8 @@
           <td>DEMO-<%= el.id %></td>
           <td><%= el.summary %></td>
           <td><%= el.status %></td>
-          <td><%= el.getDate() %></td>
-          <td style=<%= convertTime(new Date(el.target_resolution_time))[0] === '-' ? "color:red" : "color:blue"%>><%= convertTime(new Date(el.target_resolution_time)) %></td>
+          <td><%= el.createdAt %></td>
+          <td style=<%= el.target_resolution_time === '-' ? "color:red" : "color:blue"%>><%= el.target_resolution_time %></td>
           <td>
             <div class="actions">
 

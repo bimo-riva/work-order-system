@@ -18,7 +18,7 @@ class EmployeeController {
           element.status = 'On Duty'
         }        
       });
-      res.render('employee', {data, username, role})
+      res.render('employee', {data, username, roles})
     })
     .catch(err =>{
       res.send(err)

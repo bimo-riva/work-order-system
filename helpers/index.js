@@ -10,7 +10,7 @@ const isEmail = (value) => {
 }
 
 
-const convertTime = time => {
+const getRelativeTimeFormat = time => {
   let minute = 60*1000
   let hour = 60*minute
   let now = new Date()
@@ -26,7 +26,6 @@ const convertTime = time => {
     output += `${(diff % hour / minute).toFixed(0)} minute${(diff % hour / minute).toFixed(0) >= 2 ? 's' : '' }`
 
   }
-
 
   return output
 
