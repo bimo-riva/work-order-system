@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
-const { Op } = require("sequelize")
 
-const {Employee, Project, EmployeeProject, EmployeeRole } = require('../models')
+const {Employee, EmployeeRole } = require('../models')
 
 const { isEmail } = require('../helpers/index.js')
 
@@ -33,7 +32,7 @@ class Controller {
 
   static signup(req, res) {
     let username = req.session.isLoggedIn ? req.session.username : ''
-      let role = req.session.isLoggedIn ? req.session.role : ''
+      let roles = req.session.isLoggedIn ? req.session.roles : ''
     if (req.query.err) {
       res.render('signup', {errorSignup: true, username, roles})
     } else {

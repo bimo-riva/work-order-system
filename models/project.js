@@ -18,13 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       Project.hasMany(models.Comment)
     }
 
-    get target_resolution_time() {
-      return getRelativeTimeFormat(new Date(this.target_resolution_time))
-    }
-
-    get createdAt() {
-      return this.createdAt.toISOString().split('T')[0]
-    }
   };
   Project.init({
     key: {
@@ -44,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     target_resolution_time: {
       type: DataTypes.DATE,
+      get () {
+        return getRelativeTimeFormat(new Date(this.target_resolution_time))
+      }
+  
     },
     actual_resolution_time: {
       type: DataTypes.DATE

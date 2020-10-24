@@ -1,4 +1,5 @@
 const { Project, Employee, EmployeeProject } = require('../models/index')
+const {stringify} = require('../helpers')
 
 class ProjectController{
 
@@ -6,15 +7,13 @@ class ProjectController{
 
     
 
-    Project.findAll({include : Employee})
+    Project.findAll({include : [Employee, EmployeeProject]})
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
-      let role = req.session.isLoggedIn ? req.session.role : ''
+      let roles = req.session.isLoggedIn ? req.session.roles : ''
   
-      // console.log(req.session)
+      stringify(data)
 
-      console.log({username, roles})
-      
       res.render('project.ejs', {data, username, roles})
     })
     .catch(err =>{
@@ -26,7 +25,7 @@ class ProjectController{
     Employee.findAll()
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
-      let role = req.session.isLoggedIn ? req.session.role : ''
+      let roles = req.session.isLoggedIn ? req.session.roles : ''
       res.render('addProject', {data, username, roles})
     })
     .catch(err =>{
@@ -55,7 +54,7 @@ class ProjectController{
     })
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
-      let role = req.session.isLoggedIn ? req.session.role : ''
+      let roles = req.session.isLoggedIn ? req.session.roles : ''
       res.render('projectEdit', {data, employee, username, roles})
     })
     .catch(err =>{
@@ -107,10 +106,10 @@ class ProjectController{
 
   static getTeams(req,res){
     let username = req.session.isLoggedIn ? req.session.username : ''
-    let role = req.session.isLoggedIn ? req.session.role : ''
+    let roles = req.session.isLoggedIn ? req.session.roles : ''
     let employee
     let members
-    Employee.findAll({where : {role : 'Engineer'}})
+    Employee.findAll({where : {roles : 'Engineer'}})
     .then(data =>{
       employee = data
       return EmployeeProject.findAll({ include: Employee, where :{ProjectId : req.params.id}})
@@ -148,7 +147,7 @@ class ProjectController{
     console.log({input})
 
     EmployeeProject.create(input)
-    .then(data=>{
+    .then(()=>{
       res.redirect(`/projects/teams/${req.params.id}`)
     })
     .catch(err =>{
