@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      description: {
+      key: {
         type: Sequelize.STRING
       },
-      summary:{
+      description: {
         type: Sequelize.STRING
       },
       status: {
@@ -23,14 +23,11 @@ module.exports = {
       priority: {
         type: Sequelize.STRING
       },
-      finished_time: {
+      target_resolution_time: {
         type: Sequelize.DATE
       },
-      actual_finished_time: {
+      actual_resolution_time: {
         type: Sequelize.DATE
-      },
-      comment: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

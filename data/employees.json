@@ -1,0 +1,62 @@
+[
+  {
+    "name" : "Bimo Dwien Prabowo",
+    "gender" : "Male",
+    "role" : "Engineer",
+    "username": "bimo",
+    "email" : "bimo.dwien@hacktiv.com",
+    "phone" : "",
+    "password" : "123",
+    "imageUrl" : ""
+  },
+  {
+    "name" : "Mochamad Zulfikar",
+    "gender" : "Male",
+    "role" : "Manager",
+    "username": "zul",
+    "email" : "zul@hacktiv.com",
+    "phone" : "",
+    "password" : "123",
+    "imageUrl" : ""
+  },
+  {
+    "name" : "Reynaldi Riva",
+    "gender" : "Male",
+    "role" : "Engineer",
+    "username": "riva",
+    "email" : "reynaldi.riva@hacktiv.com",
+    "phone" : "+6281210161830",
+    "password" : "123",
+    "imageUrl" : ""
+  },
+  {
+    "name" : "Tamy Hu",
+    "gender" : "Female",
+    "role" : "Helpdesk",
+    "username": "tamy",
+    "email" : "tami.hu@hacktiv.com",
+    "phone" : "",
+    "password" : "123",
+    "imageUrl" : ""
+  },
+  {
+    "name" : "Musa Bagja",
+    "gender" : "Male",
+    "role" : "Engineer",
+    "username": "musa",
+    "email" : "musa.bagja@hacktiv.com",
+    "phone" : "",
+    "password" : "123",
+    "imageUrl" : ""
+  },
+  {
+    "name" : "Adrian Kuncoro",
+    "gender" : "Male",
+    "role" : "Engineer",
+    "username": "adrian",
+    "email" : "adrian.kun@hacktif.com",
+    "phone" : "",
+    "password" : "123",
+    "imageUrl" : ""
+  }
+]

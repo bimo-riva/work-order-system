@@ -1,4 +1,4 @@
-<%- include('partials/header', username, position) %>
+<%- include('partials/header', username, role) %>
 
 <div class="container">
 
@@ -9,7 +9,7 @@
       <tr>
         <th>Name</th>
         <th>Gender</th>
-        <th>Position</th>
+        <th>role</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -18,7 +18,7 @@
       <tr>
         <td><%= el.name %> </td>
         <td><%= el.gender %> </td>
-        <td><%= el.position %> </td>
+        <td><%= el.role %> </td>
         <td><%= el.status %> </td>
       </tr>
       <% }) %> 

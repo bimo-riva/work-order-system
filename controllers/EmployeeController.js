@@ -8,7 +8,7 @@ class EmployeeController {
     .then(data =>{
 
       let username = req.session.isLoggedIn ? req.session.username : ''
-      let position = req.session.isLoggedIn ? req.session.position : ''
+      let role = req.session.isLoggedIn ? req.session.role : ''
 
       data.forEach(element => {
         if(element.Projects.length === 0){
@@ -18,7 +18,7 @@ class EmployeeController {
           element.status = 'On Duty'
         }        
       });
-      res.render('employee', {data, username, position})
+      res.render('employee', {data, username, role})
     })
     .catch(err =>{
       res.send(err)

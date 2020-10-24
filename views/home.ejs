@@ -1,4 +1,4 @@
-<%- include('partials/header', username, position) %>
+<%- include('partials/header', username, role) %>
 
 <div class="container">
 
@@ -23,7 +23,7 @@
           <td><%= el.leader %></td>
           <td><%= el.status %></td>
           <td><%= el.createdAt %></td>
-          <td><%= el.finished_time %></td>
+          <td><%= el.target_resolution_time %></td>
         </tr>
 
       <% }) %>

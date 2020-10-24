@@ -1,4 +1,4 @@
-const { Project, Employee, ProjectEmployee } = require('../models/index')
+const { Project, Employee, EmployeeProject } = require('../models/index')
 
 
 const {convertTime} = require('../helpers')
@@ -10,13 +10,13 @@ class ProjectController{
     Project.findAll({include : Employee})
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
-      let position = req.session.isLoggedIn ? req.session.position : ''
+      let role = req.session.isLoggedIn ? req.session.role : ''
   
       // console.log(req.session)
 
-      console.log({username, position})
+      console.log({username, role})
       
-      res.render('project.ejs', {data, username, position, convertTime})
+      res.render('project.ejs', {data, username, role, convertTime})
     })
     .catch(err =>{
       res.send(err)
@@ -27,8 +27,8 @@ class ProjectController{
     Employee.findAll()
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
-      let position = req.session.isLoggedIn ? req.session.position : ''
-      res.render('addProject', {data, username, position})
+      let role = req.session.isLoggedIn ? req.session.role : ''
+      res.render('addProject', {data, username, role})
     })
     .catch(err =>{
       res.send(err)
@@ -56,8 +56,8 @@ class ProjectController{
     })
     .then(data =>{
       let username = req.session.isLoggedIn ? req.session.username : ''
-      let position = req.session.isLoggedIn ? req.session.position : ''
-      res.render('projectEdit', {data, employee, username, position})
+      let role = req.session.isLoggedIn ? req.session.role : ''
+      res.render('projectEdit', {data, employee, username, role})
     })
     .catch(err =>{
       res.send(err)
@@ -79,7 +79,7 @@ class ProjectController{
   static getProjectMine(res,req){
     Employee.findOne({where :{username : req.session.username}})
     .then(data =>{
-      ProjectEmployee.findAll({where : {id: data.id}})
+      EmployeeProject.findAll({where : {id: data.id}})
     })
     .catch(err =>{
       res.send(err)
@@ -108,13 +108,13 @@ class ProjectController{
 
   static getTeams(req,res){
     let username = req.session.isLoggedIn ? req.session.username : ''
-    let position = req.session.isLoggedIn ? req.session.position : ''
+    let role = req.session.isLoggedIn ? req.session.role : ''
     let employee
     let members
-    Employee.findAll({where : {position : 'Engineer'}})
+    Employee.findAll({where : {role : 'Engineer'}})
     .then(data =>{
       employee = data
-      return ProjectEmployee.findAll({ include: Employee, where :{ProjectId : req.params.id}})
+      return EmployeeProject.findAll({ include: Employee, where :{ProjectId : req.params.id}})
     })
     .then(data =>{
       members = data
@@ -123,7 +123,7 @@ class ProjectController{
     })
     .then(project => {
       console.log(JSON.stringify(members,null,2))
-      res.render('addTeam', {project, members, employee, username, position})
+      res.render('addTeam', {project, members, employee, username, role})
 
     })
     .catch(err=>{
@@ -148,7 +148,7 @@ class ProjectController{
 
     console.log({input})
 
-    ProjectEmployee.create(input)
+    EmployeeProject.create(input)
     .then(data=>{
       res.redirect(`/projects/teams/${req.params.id}`)
     })

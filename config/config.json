@@ -2,22 +2,22 @@
   "development": {
     "username": "postgres",
     "password": "123",
-    "database": "pair_project",
+    "database": "WorkOrderSystem-dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "postgres",
+    "password": "123",
+    "database": "WorkOrderSystem-test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
+    "username": "postgres",
+    "password": "123",
+    "database": "WorkOrderSystem",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   }
 }

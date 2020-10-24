@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const { Op } = require("sequelize")
 
-const {Employee, Project, ProjectEmployee} = require('../models')
+const {Employee, Project, EmployeeProject} = require('../models')
 
 const { isEmail } = require('../helpers/index.js')
 
@@ -10,14 +10,14 @@ class Controller {
   static home(req, res) {
 
     let username
-    let position
+    let role
 
     if(req.session.isLoggedIn) {
       username = req.session.username
-      position = req.session.position      
+      role = req.session.role      
     }
 
-    res.render('home', { username, position })
+    res.render('home', { username, role })
     
   }
 
@@ -33,11 +33,11 @@ class Controller {
 
   static signup(req, res) {
     let username = req.session.isLoggedIn ? req.session.username : ''
-      let position = req.session.isLoggedIn ? req.session.position : ''
+      let role = req.session.isLoggedIn ? req.session.role : ''
     if (req.query.err) {
-      res.render('signup', {errorSignup: true, username, position})
+      res.render('signup', {errorSignup: true, username, role})
     } else {
-      res.render('signup', {errorSignup: false, username, position})
+      res.render('signup', {errorSignup: false, username, role})
     }
 
   }
@@ -91,7 +91,7 @@ class Controller {
           if (result) {
             req.session.isLoggedIn = true
             req.session.username = data.username
-            req.session.position = data.position
+            req.session.role = data.role
 
             res.redirect('/')
           } else {

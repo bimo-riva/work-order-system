@@ -2,9 +2,6 @@
 const {
   Model
 } = require('sequelize');
-
-const bcrypt = require('bcrypt')
-
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
     /**
@@ -14,39 +11,62 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Employee.belongsToMany(models.Project, {through : models.ProjectEmployee})
+      Employee.belongsToMany(models.Project, {through: models.EmployeeProject})
+      Employee.belongsToMany(models.Role, {through: models.EmployeeRole})
+      
     }
-    
   };
   Employee.init({
-    name: DataTypes.STRING,
-    gender: DataTypes.STRING,
-    position: DataTypes.STRING,
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Name is required'
+        }
+      }
+    },
+    gender: {
+      type: DataTypes.STRING,
+    },
+    position: {
+      type: DataTypes.STRING,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Username is required'
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: {
+          msg: 'Email is required'
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: {
+          msg: 'Password is required'
+        }
+      }
+    },
+    imageUrl: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'Employee',
   });
-
-  Employee.beforeCreate((user,params) => {
-    const hash = bcrypt.hashSync(user.password, 12);
-
-    console.log(hash)
-
-    user.password = hash
-
-  })
-
-  Employee.beforeBulkCreate((users,params) => {
-
-    users.map(user => {
-      const hash = bcrypt.hashSync(user.password, 12);
-  
-      user.password = hash
-    })
-
-  })
   return Employee;
 };

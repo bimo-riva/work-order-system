@@ -1,4 +1,4 @@
-<%- include('partials/header', {title: 'Sign Up', username, position}) %>
+<%- include('partials/header', {title: 'Sign Up', username, role}) %>
 
 <div class="container">
 
@@ -13,9 +13,9 @@
     <input type="password" name="password">
     
 
-    <label for="position">Position</label>
-    <select name="position" >
-      <option selected disabled>-- Select Position --</option>
+    <label for="role">role</label>
+    <select name="role" >
+      <option selected disabled>-- Select role --</option>
       <option value="Manager">Manager</option>
       <option value="Engineer">Engineer</option>
       <option value="Helpdesk">Helpdesk</option>

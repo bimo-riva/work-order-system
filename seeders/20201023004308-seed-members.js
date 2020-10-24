@@ -6,7 +6,7 @@ module.exports = {
      * Add seed commands here.
      *
      * Example:
-     * await queryInterface.bulkInsert('People', [{
+     * return queryInterface.bulkInsert('People', [{
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
@@ -58,7 +58,7 @@ module.exports = {
       el.createdAt = new Date()
       el.updatedAt = new Date()
     })
-    return queryInterface.bulkInsert("ProjectEmployees", members, {})
+    return queryInterface.bulkInsert("EmployeeProjects", members, {})
 
   },
 
@@ -67,10 +67,10 @@ module.exports = {
      * Add commands to revert seed here.
      *
      * Example:
-     * await queryInterface.bulkDelete('People', null, {});
+     * return queryInterface.bulkDelete('People', null, {});
      */
 
-    return queryInterface.bulkDelete("ProjectEmployees", members)
+    return queryInterface.bulkDelete("EmployeeProjects", members)
 
   }
 };
