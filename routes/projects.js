@@ -14,6 +14,7 @@ projectRoutes.get('/unassigned', ProjectController.getProjectUnassigned)
 projectRoutes.get('/delete/:id', ProjectController.getProjectDelete)
 projectRoutes.get('/teams/:id', isAuthenticated, ProjectController.getTeams)
 projectRoutes.post('/teams/:id', isAuthenticated, ProjectController.postTeams)
+projectRoutes.get('/removeMember/:ProjectId/:EmployeeId', isAuthenticated, ProjectController.removeMember)
 
 module.exports = projectRoutes
 

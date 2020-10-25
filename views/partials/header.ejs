@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="/style.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-  <title>{ title }</title>
+  <title><%= title %></title>
 </head>
 <body>
 
@@ -15,12 +15,12 @@
       <section class="left">
         <a href="/">Home</a>
         <!-- <a href="/">Reports</a> -->
-        <% if (role === 'Manager') {%>
+        <% if (roles.includes('manager')) {%>
         <a href="/employees">Employees</a>
         <% } %>
       </section>
       <section class="right">
-        <button onclick="window.location.href = '/projects/add'" class="button">Create Project</button>
+        <button onclick="window.location.href = '/projects/add'" class="button" style="margin-right: 2rem">Create Project</button>
         <% if (username) {%>
           <button onclick="window.location.href = '/logout'" class="button button-logout" >Logout</button>
           <div id="avatar">
@@ -28,6 +28,7 @@
           </div>
         <% } else { %>
            
+          <button onclick="window.location.href = '/signup'" class="button button-info" style="margin-left: 1rem">Sign Up</button>
           <button onclick="window.location.href = '/login'" class="button button-logout" style="margin-left: 1rem">Sign In</button>
         <% } %>
       </section>

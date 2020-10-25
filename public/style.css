@@ -166,6 +166,21 @@ div#avatar {
   flex-direction: row
 }
 
+.notification {
+  margin: 1rem 0;
+  padding: 1rem; 
+}
+
+.notification-error {
+  background:rgb(245, 183, 183);
+  color:rgb(201, 26, 26)
+}
+
+.notification-warning {
+  background:rgb(253, 255, 135);
+  color:rgb(138, 112, 26)
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -256,6 +271,7 @@ h2 {
   padding: 0.5rem 0.85rem;
   border-radius: 6px;
   background-color: var(--accent);
+  border: 2px solid var(--accent);
   color: white;
   border: none;
   font-size: 0.85rem;
@@ -265,6 +281,8 @@ h2 {
   cursor: pointer;
 }
 
+
+
 .button-logout {
   margin-left: 1rem;
   background-color: var(--bg-color);
@@ -273,10 +291,14 @@ h2 {
 }
 .button-info {
   background-color: var(--green);
+  border: 2px solid var(--green);
+
 }
 
 .button-danger {
   background-color: var(--red);
+  border: 2px solid var(--red);
+
 }
 
 a.button:hover {
@@ -287,10 +309,15 @@ a.button:hover {
   filter: brightness(1.2)
 }
 
+.button:disabled {
+  background-color: var(--grey-light);
+  color: var(--grey-dark);
+  border: 0
+}
 
-
-
-
+.button:disabled:hover {
+  filter: unset
+}
 
 footer {
   min-height: var(--header-height);

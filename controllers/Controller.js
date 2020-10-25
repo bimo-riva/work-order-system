@@ -56,59 +56,12 @@ class Controller {
   }
 
   static login(req, res) {
-    if (req.query.err) {
-      res.render('login', {errorLogin: true})
-    } else {
-      res.render('login', {errorLogin: false})
-    }
+
+    res.render('login')
 
   }
 
-  static postLogin(req, res) {
-    
-    console.log(req.user)
 
-    user ? res.redirect('/') : res.redirect('/login?err=true')
-
-
-    // console.log(req.body)
-
-    // let input = {}
-
-    // if (isEmail(req.body.user)) {
-    //   input.email = req.body.user
-    // } else {
-    //   input.username = req.body.user
-    // }
-
-    // Employee.findOne({
-    //   where:  input
-    // })
-    // .then(data => {
-    //   if (!data) {
-    //     res.redirect('/login?err=true')
-    //   } else {
-    //     bcrypt.compare(req.body.password, data.password)
-    //     .then(result => {
-    //       if (!result) {
-    //         res.redirect('/login?err=true')
-            
-    //       } else {
-    //         req.session.isAuthenticated = true
-    //         req.session.username = data.username
-            
-    //         return EmployeeRole.findAll({where: { EmployeeId: data.id}})
-    //       }
-    //     })
-    //     .then(roles => {
-    //       req.session.roles = roles
-    //       res.redirect('/')
-    //     })
-    //     .catch(err => res.send(err))
-    //   }
-    // })
-
-  }
 
 }
 

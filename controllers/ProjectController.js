@@ -1,3 +1,5 @@
+const { Op } = require("sequelize");
+
 const { Project, Employee, EmployeeProject, Comment, Role, Permission, RolePermission } = require('../models/')
 const {stringify} = require('../helpers')
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
@@ -6,29 +8,21 @@ class ProjectController{
 
   static show(req, res){
 
-    // res.send('PROJECTS')
-    res.render('partials/header', {title: 'Test', username: '', role: ''})
+    let username = req.user ? req.user.username : ''
+    let roles = req.user ? req.user.roles : []
 
-    Project.findAll()
-    .then(data => {
-      
-      console.log(JSON.stringify(data,null,2))
-      res.send(data)
+    console.log({username, roles})
+
+ 
+    // Project.findAll()
+    Project.findAll({include : [Employee]})
+    .then(data =>{
+      console.log(stringify(data))
+      res.render('project.ejs', {data, username, roles})
     })
-    .catch(err => res.send(err))
-
-    // Project.findAll({include : [Employee, EmployeeProject]})
-    // .then(data =>{
-    //   let username = req.session.isAuthenticated ? req.session.username : ''
-    //   let roles = req.session.isAuthenticated ? req.session.roles : ''
-  
-    //   stringify(data)
-
-    //   res.render('project.ejs', {data, username, roles})
-    // })
-    // .catch(err =>{
-    //   res.send(err)
-    // })
+    .catch(err =>{
+      res.send(err)
+    })
   }
 
   static getProjectAdd(req, res){
@@ -115,14 +109,19 @@ class ProjectController{
   }
 
   static getTeams(req,res){
-    let username = req.session.isAuthenticated ? req.session.username : ''
-    let roles = req.session.isAuthenticated ? req.session.roles : ''
-    let employee
+    let username = req.isAuthenticated() ? req.user.username : ''
+    let roles = req.isAuthenticated() ? req.user.roles : ''
+    let employees
     let members
-    Employee.findAll({where : {roles : 'Engineer'}})
+
+    Employee.findAll()
     .then(data =>{
-      employee = data
-      return EmployeeProject.findAll({ include: Employee, where :{ProjectId : req.params.id}})
+      employees = data
+      return EmployeeProject.findAll({ 
+        include: Employee, 
+        where :{ProjectId : req.params.id},
+        order: [['isLeader', 'DESC']]
+      })
     })
     .then(data =>{
       members = data
@@ -130,8 +129,20 @@ class ProjectController{
       return Project.findByPk(req.params.id)
     })
     .then(project => {
-      console.log(JSON.stringify(members,null,2))
-      res.render('addTeam', {project, members, employee, username, roles})
+
+      employees = employees.map(el => el.toJSON())
+      members = members.map(el => el.toJSON())
+
+
+      // employees = employees.map(el => {
+      //   members.map(member => {
+      //     if (el.name === member.name) {
+
+      //     }
+      //   })
+      // })
+
+      res.render('addTeam', {project, members, employees, username, roles})
 
     })
     .catch(err=>{
@@ -145,24 +156,58 @@ class ProjectController{
       ProjectId : req.params.id,
     }
 
-    let isLeader
-    if (req.body.isLeader  === 'on') {
-      isLeader = true
-    } else {
-      isLeader = false
-    }
-
-    input.isLeader = isLeader
-
-    console.log({input})
-
-    EmployeeProject.create(input)
-    .then(()=>{
-      res.redirect(`/projects/teams/${req.params.id}`)
+    return EmployeeProject.findOne({
+      where: {
+        [Op.and]: [
+          {ProjectId: req.params.id},
+          {EmployeeId: req.body.EmployeeId}
+        ]
+      },
+      include: Employee
     })
-    .catch(err =>{
-      res.send(err)
+    .then(data => {
+      if (data) {
+        req.flash('error', `${data.Employee.name} is already in the team`);
+        res.redirect(`/projects/teams/${req.params.id}`)
+      } else {
+
+        let isLeader
+        if (req.body.isLeader  === 'on') {
+          isLeader = true
+        } else {
+          isLeader = false
+        }
+    
+        input.isLeader = isLeader
+    
+        EmployeeProject.create(input)
+        .then(()=>{
+          res.redirect(`/projects/teams/${req.params.id}`)
+        })
+        .catch(err =>{
+          res.send(err)
+        })
+        
+      }
     })
+
+  }
+
+  static removeMember(req, res) {
+
+    EmployeeProject.destroy({
+      where: {
+        [Op.and]: [
+          {ProjectId: req.params.ProjectId},
+          {EmployeeId: req.params.EmployeeId}
+        ]
+      }
+    })
+    .then(() => {
+      res.redirect(`/projects/teams/${req.params.ProjectId}`)
+    })
+    .catch(err => res.send(err))
+    
   }
 }
 

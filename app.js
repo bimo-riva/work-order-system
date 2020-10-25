@@ -20,13 +20,12 @@ app.use(session({
   }
 }));
 
-app.use(routes)
 app.use(express.static('public'))
 
+app.use(flash())
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash())
-
+app.use(routes)
 
 
 app.listen(port , () =>{

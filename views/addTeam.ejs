@@ -4,9 +4,14 @@
 
   <h1>Add Team Members</h1>
   <form action="/projects/teams/<%= project.id %>" method="post">
+    <% if (messages.error) { %>
+      <div class="notification notification-warning">
+        <%= messages.error %>
+      </div>
+    <% } %>
     <label for="EmployeeId">Team Member</label>
     <select name="EmployeeId">
-      <%employee.forEach(el =>{ %> 
+      <%employees.forEach(el =>{ %> 
       <option value="<%= el.id %>"> <%= el.name %> </option>
       <% }) %> 
   </select>
@@ -29,6 +34,7 @@
       <td>No</td>
       <td>Name</td>
       <td>Status</td>
+      <td>Actions</td>
     </tr>
   </thead>
   <tbody>
@@ -38,7 +44,17 @@
         <td><%= el.Employee.name %> </td>
         <% if (el.isLeader) { %>
         <td>Team Leader</td>
-        <% } %> 
+        <% } else {%>
+          <td>Member</td> 
+        <% } %>
+        <td>
+          <div class="actions">
+
+            <button class="button button-danger" onclick="window.location.href = '/projects/removeMember/<%= project.id %>/<%= el.Employee.id %>'">Remove</button>
+            <button class="button">Show in Map</button>
+            <button class="button">Chat</button>
+          </div>
+        </td>
     </tr>
     <% }) %> 
   </tbody>

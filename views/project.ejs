@@ -9,31 +9,39 @@
       <tr>
         <th>Key</th>
         <th>Summary</th>
-        <!-- <th>Team Leader</th> -->
+        <th>Team Leader</th>
         <th>Status</th>
-        <th>Created</th>
+        <th>Created At</th>
         <th>Time to resolution</th>
-        <th>Action</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <% data.map(el => { %>
+      <% if (data.length > 0) { %>
+        <% data.map(el => { %>
         <tr>
           <td>DEMO-<%= el.id %></td>
           <td><%= el.summary %></td>
+          <td>
+              <% el.Employees.forEach(employee => { %>
+                <% if (employee.EmployeeProject.isLeader) {%> 
+                  <%= employee.name %>
+              <% }}) %>
+            </td>
           <td><%= el.status %></td>
           <td><%= el.createdAt %></td>
-          <td style=<%= el.target_resolution_time === '-' ? "color:red" : "color:blue"%>><%= el.target_resolution_time %></td>
+          <td style=<%= el.target_resolution_time === '-' ? "color:red" : "color:blue"%>><%= el.status === 'Closed' ? "Closed" : el.target_resolution_time %></td>
           <td>
             <div class="actions">
 
-              <a href="/projects/edit/<%= el.id %> " class="button">Edit</a>
-              <a href="/projects/teams/<%= el.id %>" class="button button-info">Assign Members</a>
+              <button = '/projects/edit/<%= el.id %>'" class="button">Edit</button>
+              <button onclick="window.location.href ='/projects/teams/<%= el.id %>'" <%= el.status === 'Closed' ? "disabled" : "" %> class="button button-info">Assign Members</a>
             </div>
           </td>
         </tr>
 
-      <% }) %>
+        <% }) %>
+      <% } %>
     </tbody>
   </table>
 

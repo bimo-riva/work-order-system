@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Project.belongsToMany(models.Employee, {through: models.EmployeeProject})
       Project.hasMany(models.Comment)
+      Project.hasMany(models.EmployeeProject)
     }
 
   };
@@ -41,12 +42,19 @@ module.exports = (sequelize, DataTypes) => {
     target_resolution_time: {
       type: DataTypes.DATE,
       get () {
-        return getRelativeTimeFormat(new Date(this.target_resolution_time))
+        return getRelativeTimeFormat(new Date(this.getDataValue('target_resolution_time')))
       }
   
     },
     actual_resolution_time: {
       type: DataTypes.DATE
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      get () {
+        return this.getDataValue('createdAt').toISOString().split('T')[0]
+      }
+  
     },
   }, {
     sequelize,

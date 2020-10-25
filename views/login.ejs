@@ -15,11 +15,12 @@
     <h1 style="text-align: center;">Sign In</h1>
   
     <form action="/login" method="POST" style="margin: 0 auto">
-      <% if (errorLogin) { %>
-      <div style="padding: 2rem; background:rgb(248, 171, 171);color:rgb(201, 26, 26)">
-        <p>Invalid credentials</p>
-      </div>
-      <% } %>
+
+      <% if (messages.error) { %>
+        <div class="notification notification-error">
+          <p><%= messages.error %></p>
+        </div>
+      <%} %>
 
 
       <label for="user">Username/Email</label>

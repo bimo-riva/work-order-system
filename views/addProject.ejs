@@ -58,7 +58,7 @@ defer
   infoWindow.open(map);
   // Configure the click listener.
   map.addListener("click", (mapsMouseEvent) => {
-    // Close the current InfoWindow.
+    // Closed the current InfoWindow.
     infoWindow.close();
     // Create a new InfoWindow.
     infoWindow = new google.maps.InfoWindow({

@@ -1,7 +1,9 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const isEmail = require('../helpers/index')
-const { Employee } = require('../models')
+const bcrypt = require('bcrypt')
+
+const {isEmail} = require('../helpers/index')
+const { Employee, Role } = require('../models')
 
 
 // Serialize sessions -> creates cookies
@@ -11,17 +13,24 @@ passport.serializeUser( (user, done) => {
 
 // Deserialize sessions -> reads cookies 
 passport.deserializeUser( (user, done) => {
-  Employee.findByPk(user.id)
-  .then( user => done(null, user))
+  Employee.findOne({where: { username: user.username }, include: Role})
+  .then( user => {
+    
+    let roles = user.Roles.map(role => role.name)
+    
+    return done(null, {username: user.username, roles})})
   .catch( err => done(err, null))
 })
 
 // For authentication purposes
 passport.use(new LocalStrategy({
-  usernameField: 'user',
-} ,(usernameOrEmail, password, done) => {
-      
-  let input = {}
+    usernameField: 'user',
+    passReqToCallback : true
+  } ,(req, usernameOrEmail, password, done) => {
+
+    let input = {}
+    let user
+    let roles
 
     if (isEmail(usernameOrEmail)) {
       input.email = usernameOrEmail
@@ -30,33 +39,28 @@ passport.use(new LocalStrategy({
     }
 
     Employee.findOne({
-      where:  input
+      where:  input,
+      include: [{model: Role}]
     })
     .then(data => {
       if (!data) {
-        // res.redirect('/login?err=true')
-        return done(null, false, { message: 'Incorrect username' })
+        return done(null, false, { message: 'Incorrect username or password' })
+      } 
+
+      user = data
+      roles = data.Roles.map( role => role.name)
+
+      return bcrypt.compare(password, user.password)
+    })
+    .then(result => {
+      if (!result) {
+        return done(null, false, { message: 'Incorrect username or password'})
+        
       } else {
-        bcrypt.compare(password, data.password)
-        .then(result => {
-          if (!result) {
-            // res.redirect('/login?err=true')
-            return done(null, false, { message: 'Incorrect password'})
-            
-          } else {
-            // req.session.isAuthenticated = true
-            // req.session.username = data.username
-            
-            return EmployeeRole.findAll({where: { EmployeeId: data.id}})
-          }
-        })
-        .then(roles => {
-          req.session.roles = roles
-          res.redirect('/')
-        })
-        .catch(err => {return done(err)})
+        return done(null, {username: user.username, roles })
       }
     })
+    .catch(err => {return done(err)})
 
-}
+  }
 ));
