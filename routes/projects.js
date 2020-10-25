@@ -1,19 +1,19 @@
 const express = require('express')
 const projectRoutes = express.Router()
-const isLoggedIn = require('../middlewares/isLoggedIn')
+const isAuthenticated = require('../middlewares/')
 
 const ProjectController = require('../controllers/ProjectController')
 
 projectRoutes.get('/', ProjectController.show)
-projectRoutes.get('/add', isLoggedIn, ProjectController.getProjectAdd)
-projectRoutes.post('/add', isLoggedIn, ProjectController.postProjectAdd)
-projectRoutes.get('/edit/:id', isLoggedIn, ProjectController.getProjectEdit)
-projectRoutes.post('/edit/:id', isLoggedIn, ProjectController.postProjectEdit)
-projectRoutes.get('/mine', isLoggedIn, ProjectController.getProjectMine)
+projectRoutes.get('/add', isAuthenticated, ProjectController.getProjectAdd)
+projectRoutes.post('/add', isAuthenticated, ProjectController.postProjectAdd)
+projectRoutes.get('/edit/:id', isAuthenticated, ProjectController.getProjectEdit)
+projectRoutes.post('/edit/:id', isAuthenticated, ProjectController.postProjectEdit)
+projectRoutes.get('/mine', isAuthenticated, ProjectController.getProjectMine)
 projectRoutes.get('/unassigned', ProjectController.getProjectUnassigned)
 projectRoutes.get('/delete/:id', ProjectController.getProjectDelete)
-projectRoutes.get('/teams/:id', isLoggedIn, ProjectController.getTeams)
-projectRoutes.post('/teams/:id', isLoggedIn, ProjectController.postTeams)
+projectRoutes.get('/teams/:id', isAuthenticated, ProjectController.getTeams)
+projectRoutes.post('/teams/:id', isAuthenticated, ProjectController.postTeams)
 
 module.exports = projectRoutes
 

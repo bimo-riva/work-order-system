@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Role.belongsToMany(models.Employee, {through: models.EmployeeRole, sourceKey: 'name'})
       Role.belongsToMany(models.Permission, {through: models.RolePermission, sourceKey: 'name'})
+      Role.hasMany(models.RolePermission)
     }
   };
   Role.init({

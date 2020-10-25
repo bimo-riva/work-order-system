@@ -7,8 +7,8 @@ class EmployeeController {
     })
     .then(data =>{
 
-      let username = req.session.isLoggedIn ? req.session.username : ''
-      let role = req.session.isLoggedIn ? req.session.role : ''
+      let username = req.session.isAuthenticated ? req.session.username : ''
+      let role = req.session.isAuthenticated ? req.session.role : ''
 
       data.forEach(element => {
         if(element.Projects.length === 0){

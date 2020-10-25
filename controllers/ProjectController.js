@@ -1,32 +1,42 @@
-const { Project, Employee, EmployeeProject } = require('../models/index')
+const { Project, Employee, EmployeeProject, Comment, Role, Permission, RolePermission } = require('../models/')
 const {stringify} = require('../helpers')
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
 
 class ProjectController{
 
   static show(req, res){
 
-    
+    // res.send('PROJECTS')
+    res.render('partials/header', {title: 'Test', username: '', role: ''})
 
-    Project.findAll({include : [Employee, EmployeeProject]})
-    .then(data =>{
-      let username = req.session.isLoggedIn ? req.session.username : ''
-      let roles = req.session.isLoggedIn ? req.session.roles : ''
+    Project.findAll()
+    .then(data => {
+      
+      console.log(JSON.stringify(data,null,2))
+      res.send(data)
+    })
+    .catch(err => res.send(err))
+
+    // Project.findAll({include : [Employee, EmployeeProject]})
+    // .then(data =>{
+    //   let username = req.session.isAuthenticated ? req.session.username : ''
+    //   let roles = req.session.isAuthenticated ? req.session.roles : ''
   
-      stringify(data)
+    //   stringify(data)
 
-      res.render('project.ejs', {data, username, roles})
-    })
-    .catch(err =>{
-      res.send(err)
-    })
+    //   res.render('project.ejs', {data, username, roles})
+    // })
+    // .catch(err =>{
+    //   res.send(err)
+    // })
   }
 
   static getProjectAdd(req, res){
     Employee.findAll()
     .then(data =>{
-      let username = req.session.isLoggedIn ? req.session.username : ''
-      let roles = req.session.isLoggedIn ? req.session.roles : ''
-      res.render('addProject', {data, username, roles})
+      let username = req.session.isAuthenticated ? req.session.username : ''
+      let roles = req.session.isAuthenticated ? req.session.roles : ''
+      res.render('addProject', {data, username, roles, GOOGLE_API_KEY})
     })
     .catch(err =>{
       res.send(err)
@@ -53,8 +63,8 @@ class ProjectController{
       return Project.findByPk(req.params.id)
     })
     .then(data =>{
-      let username = req.session.isLoggedIn ? req.session.username : ''
-      let roles = req.session.isLoggedIn ? req.session.roles : ''
+      let username = req.session.isAuthenticated ? req.session.username : ''
+      let roles = req.session.isAuthenticated ? req.session.roles : ''
       res.render('projectEdit', {data, employee, username, roles})
     })
     .catch(err =>{
@@ -105,8 +115,8 @@ class ProjectController{
   }
 
   static getTeams(req,res){
-    let username = req.session.isLoggedIn ? req.session.username : ''
-    let roles = req.session.isLoggedIn ? req.session.roles : ''
+    let username = req.session.isAuthenticated ? req.session.username : ''
+    let roles = req.session.isAuthenticated ? req.session.roles : ''
     let employee
     let members
     Employee.findAll({where : {roles : 'Engineer'}})

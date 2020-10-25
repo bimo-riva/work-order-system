@@ -1,8 +1,13 @@
 const bcrypt = require('bcrypt')
 
+const passport = require('passport')
+
 const {Employee, EmployeeRole } = require('../models')
 
 const { isEmail } = require('../helpers/index.js')
+
+const { destroySession } = require('../middlewares')
+
 
 class Controller {
 
@@ -11,7 +16,7 @@ class Controller {
     let username
     let roles
 
-    if(req.session.isLoggedIn) {
+    if(req.session.isAuthenticated) {
       username = req.session.username
       roles = req.session.roles      
     }
@@ -21,18 +26,15 @@ class Controller {
   }
 
   static logout(req, res) {
-
-    if(req.session.isLoggedIn) {
-      req.session.destroy()
-
-      res.redirect('/')
-    }
+    req.logOut()
+    req.session.destroy()
+    res.redirect('/')
 
   }
 
   static signup(req, res) {
-    let username = req.session.isLoggedIn ? req.session.username : ''
-      let roles = req.session.isLoggedIn ? req.session.roles : ''
+    let username = req.session.isAuthenticated ? req.session.username : ''
+      let roles = req.session.isAuthenticated ? req.session.roles : ''
     if (req.query.err) {
       res.render('signup', {errorSignup: true, username, roles})
     } else {
@@ -63,46 +65,51 @@ class Controller {
   }
 
   static postLogin(req, res) {
+    
+    console.log(req.user)
 
-    console.log(req.body)
+    user ? res.redirect('/') : res.redirect('/login?err=true')
 
-    let input = {}
 
-    if (isEmail(req.body.user)) {
-      input.email = req.body.user
-    } else {
-      input.username = req.body.user
+    // console.log(req.body)
 
-    }
+    // let input = {}
 
-    Employee.findOne({
-      where:  input
-    })
-    .then(data => {
-      if (!data) {
-        res.redirect('/login?err=true')
-      } else {
-        bcrypt.compare(req.body.password, data.password)
-        .then(result => {
-          if (!result) {
-            res.redirect('/login?err=true')
+    // if (isEmail(req.body.user)) {
+    //   input.email = req.body.user
+    // } else {
+    //   input.username = req.body.user
+    // }
+
+    // Employee.findOne({
+    //   where:  input
+    // })
+    // .then(data => {
+    //   if (!data) {
+    //     res.redirect('/login?err=true')
+    //   } else {
+    //     bcrypt.compare(req.body.password, data.password)
+    //     .then(result => {
+    //       if (!result) {
+    //         res.redirect('/login?err=true')
             
-          } else {
-            req.session.isLoggedIn = true
-            req.session.username = data.username
+    //       } else {
+    //         req.session.isAuthenticated = true
+    //         req.session.username = data.username
             
-            return EmployeeRole.findAll({where: { EmployeeId: data.id}})
-          }
-        })
-        .then(roles => {
-          req.session.roles = roles
-          res.redirect('/')
-        })
-        .catch(err => res.send(err))
-      }
-    })
+    //         return EmployeeRole.findAll({where: { EmployeeId: data.id}})
+    //       }
+    //     })
+    //     .then(roles => {
+    //       req.session.roles = roles
+    //       res.redirect('/')
+    //     })
+    //     .catch(err => res.send(err))
+    //   }
+    // })
 
   }
+
 }
 
 module.exports = Controller

@@ -1,12 +1,11 @@
 const isEmail = (value) => {
+  console.log('is email called')
 
-  {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value))
     {
       return (true)
     }
     return (false)
-  }
 }
 
 
@@ -34,6 +33,5 @@ const getRelativeTimeFormat = time => {
 const stringify = (json, indent = 2) => {
   console.log(JSON.stringify(json, null, indent))
 }
-
 
 module.exports = {isEmail, getRelativeTimeFormat, stringify}
