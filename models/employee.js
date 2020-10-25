@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+const bcrypt = require('bcrypt')
+
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
     /**
@@ -71,8 +74,6 @@ module.exports = (sequelize, DataTypes) => {
 
   Employee.beforeCreate((user,params) => {
     const hash = bcrypt.hashSync(user.password, 12);
-
-    console.log(hash)
 
     user.password = hash
 

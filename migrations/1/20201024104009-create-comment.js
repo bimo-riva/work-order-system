@@ -11,13 +11,13 @@ module.exports = {
       text: {
         type: Sequelize.STRING
       },
-      UserId: {
+      EmployeeId: {
         type: Sequelize.INTEGER
       },
       ProjectId: {
         type: Sequelize.INTEGER
       },
-      ParentId: {
+      parentId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

@@ -16,11 +16,25 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   EmployeeRole.init({
-    EmployeeId: DataTypes.STRING,
-    RoleId: DataTypes.STRING
+    EmployeeId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Employee',
+        key: 'id'
+      }},
+    RoleName: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Role',
+        key: 'name'
+      }
+    },
   }, {
     sequelize,
     modelName: 'EmployeeRole',
   });
+
+  EmployeeRole.removeAttribute('id')
+
   return EmployeeRole;
 };

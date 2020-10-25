@@ -35,4 +35,5 @@ const stringify = (json, indent = 2) => {
   console.log(JSON.stringify(json, null, indent))
 }
 
-module.exports = {isEmail, convertTime, stringify}
+
+module.exports = {isEmail, getRelativeTimeFormat, stringify}

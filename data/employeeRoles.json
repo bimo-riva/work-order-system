@@ -1,0 +1,26 @@
+[
+  {
+    "EmployeeId": 1,
+    "RoleName": "engineer"
+  },
+  {
+    "EmployeeId": 2,
+    "RoleName": "manager"
+  },
+  {
+    "EmployeeId": 3,
+    "RoleName": "engineer"
+  },
+  {
+    "EmployeeId": 4,
+    "RoleName": "helpdesk"
+  },
+  {
+    "EmployeeId": 5,
+    "RoleName": "engineer"
+  },
+  {
+    "EmployeeId": 6,
+    "RoleName": "engineer"
+  }
+]

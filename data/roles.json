@@ -1,0 +1,22 @@
+[
+  {
+    "name" : "admin",
+    "description" : null
+  },
+  {
+    "name" : "manager",
+    "description" : null
+  },
+  {
+    "name" : "engineer",
+    "description" : null
+  },
+  {
+    "name" : "helpdesk",
+    "description" : null
+  },
+  {
+    "name" : "team_leader",
+    "description" : null
+  }
+]

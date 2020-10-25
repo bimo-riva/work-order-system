@@ -1,0 +1,43 @@
+[
+  {
+    "name" : "user:create",
+    "description": null
+  },
+  {
+    "name" : "user:edit",
+    "description": null
+  },
+  {
+    "name" : "user:delete",
+    "description": null
+  },
+  {
+    "name" : "project:create",
+    "description": null
+  },
+  {
+    "name" : "project:edit",
+    "description": null
+  },
+  {
+    "name" : "project:read",
+    "description": null
+  },
+  {
+    "name" : "project:write_comment",
+    "description": null
+  },
+  {
+    "name" : "project:edit_status",
+    "description": null
+  },
+  {
+    "name" : "engineer:assign",
+    "description": null
+  },
+  {
+    "name" : "engineer:read",
+    "description": null
+  }
+ 
+]

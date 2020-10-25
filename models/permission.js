@@ -11,18 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Permission.belongsToMany(models.Roles, {through: models.RolePermission})
+      Permission.belongsToMany(models.Role, {through: models.RolePermission})
     }
   };
   Permission.init({
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
+      primaryKey: true
     },
     description: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Permission',
   });
+
+  Permission.removeAttribute('id')
+
   return Permission;
 };

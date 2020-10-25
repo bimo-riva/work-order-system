@@ -1,0 +1,58 @@
+[
+  {
+    "RoleName" : "admin",
+    "PermissionName" : "user:create"
+  },
+  {
+    "RoleName" : "admin",
+    "PermissionName" : "user:edit"
+  },
+  {
+    "RoleName" : "admin",
+    "PermissionName" : "user:delete"
+  },
+  {
+    "RoleName" : "helpdesk",
+    "PermissionName" : "project:create"
+  },
+  {
+    "RoleName" : "helpdesk",
+    "PermissionName" : "project:edit"
+  },
+  {
+    "RoleName" : "helpdesk",
+    "PermissionName" : "project:read"
+  },
+  {
+    "RoleName" : "helpdesk",
+    "PermissionName" : "project:write_comment"
+  },
+  {
+    "RoleName" : "manager",
+    "PermissionName" : "engineer:assign"
+  },
+  {
+    "RoleName" : "manager",
+    "PermissionName" : "engineer:read"
+  },
+  {
+    "RoleName" : "manager",
+    "PermissionName" : "project:read"
+  },
+  {
+    "RoleName" : "manager",
+    "PermissionName" : "project:write_comment"
+  },
+  {
+    "RoleName" : "engineer",
+    "PermissionName" : "project:read"
+  },
+  {
+    "RoleName" : "engineer",
+    "PermissionName" : "project:write_comment"
+  },
+  {
+    "RoleName" : "team_leader",
+    "PermissionName" : "project:edit_status"
+  }
+]

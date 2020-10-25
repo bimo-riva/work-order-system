@@ -1,0 +1,42 @@
+[
+  {
+    "isLeader": true,
+    "EmployeeId": 2,
+    "ProjectId": 1
+  },
+  {
+    "isLeader": false,
+    "EmployeeId": 4,
+    "ProjectId": 1
+  },
+  {
+    "isLeader": false,
+    "EmployeeId": 1,
+    "ProjectId": 1
+  },
+  {
+    "isLeader": true,
+    "EmployeeId": 6,
+    "ProjectId": 2
+  },
+  {
+    "isLeader": false,
+    "EmployeeId": 1,
+    "ProjectId": 2
+  },
+  {
+    "isLeader": true,
+    "EmployeeId": 4,
+    "ProjectId": 3
+  },
+  {
+    "isLeader": false,
+    "EmployeeId": 3,
+    "ProjectId": 2
+  },
+  {
+    "isLeader": false,
+    "EmployeeId": 1,
+    "ProjectId": 3
+  }
+]

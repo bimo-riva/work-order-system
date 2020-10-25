@@ -12,10 +12,10 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       EmployeeId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       ProjectId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

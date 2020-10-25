@@ -16,11 +16,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   RolePermission.init({
-    RoleId: DataTypes.INTEGER,
-    PermissionId: DataTypes.INTEGER
+    RoleName: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Role',
+        key: 'name'
+      }
+    },
+    PermissionName: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Permission',
+        key: 'name'
+      }
+    }
   }, {
     sequelize,
     modelName: 'RolePermission',
   });
+
+  RolePermission.removeAttribute('id')
+  
   return RolePermission;
 };

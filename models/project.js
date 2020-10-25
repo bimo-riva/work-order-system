@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     key: {
       type: DataTypes.STRING,
     },
+    summary: {
+      type: DataTypes.STRING,
+    },
     description: {
       type: DataTypes.STRING,
     },
